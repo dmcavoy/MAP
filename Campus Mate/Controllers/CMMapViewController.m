@@ -456,16 +456,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 /* update the locaion of the green pin indication the user's location */
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    // PUT CODE HERE TO CHECK IF ITS A BUILDING WITH AUDIO AND SHOW NOTIFICATION
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Building Audio"
-                          message: @"There is a building audio available for this building"
-                          delegate: self.audioAlert
-                          cancelButtonTitle:@"No Thanks"
-                          otherButtonTitles:@"Listen",nil];
-    [alert show];
-    
+    [self.audioAlert showAlert];
     
     /* convert lon/lat to x/y coordinates */
     CGPoint mapPoint = [self mapPointFromLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];

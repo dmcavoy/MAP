@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3307CB86172F419300A88B32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307CB85172F419300A88B32 /* AVFoundation.framework */; };
-		3307CB88172F434D00A88B32 /* TaDa.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3307CB87172F434D00A88B32 /* TaDa.mp3 */; };
 		337918C11729BDD3005D769C /* 5-0-0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E61729BDD3005D769C /* 5-0-0.jpg */; };
 		337918C21729BDD3005D769C /* 5-0-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E71729BDD3005D769C /* 5-0-1.jpg */; };
 		337918C31729BDD3005D769C /* 5-0-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E81729BDD3005D769C /* 5-0-2.jpg */; };
@@ -229,6 +228,21 @@
 		3379199A1729BDD3005D769C /* 5-17-10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918BF1729BDD3005D769C /* 5-17-10.jpg */; };
 		3379199B1729BDD3005D769C /* 5-17-11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918C01729BDD3005D769C /* 5-17-11.jpg */; };
 		33F4D696172EF81500F7A51D /* AudioAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D695172EF81500F7A51D /* AudioAlerts.m */; };
+		33F5EC9E1730BE9B0021F532 /* collegeHouseSystem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */; };
+		33F5ECA01730BEA00021F532 /* Russwurm 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */; };
+		33F5ECA21730BEB20021F532 /* MemorialHall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */; };
+		33F5ECA41730BEB70021F532 /* MassHall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA31730BEB70021F532 /* MassHall.mp3 */; };
+		33F5ECA61730BEC00021F532 /* Adams.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA51730BEC00021F532 /* Adams.mp3 */; };
+		33F5ECA81730BECD0021F532 /* HL.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA71730BECD0021F532 /* HL.mp3 */; };
+		33F5ECAA1730BED40021F532 /* GibsonHall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA91730BED40021F532 /* GibsonHall.mp3 */; };
+		33F5ECAC1730BEDA0021F532 /* ArtMuseum.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECAB1730BEDA0021F532 /* ArtMuseum.mp3 */; };
+		33F5ECAE1730BEE10021F532 /* VAC.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECAD1730BEE10021F532 /* VAC.mp3 */; };
+		33F5ECB01730BEEC0021F532 /* Russwurm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECAF1730BEEC0021F532 /* Russwurm.mp3 */; };
+		33F5ECB21730BEF20021F532 /* McKeenCenter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB11730BEF20021F532 /* McKeenCenter.mp3 */; };
+		33F5ECB41730BEF80021F532 /* Sills.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB31730BEF80021F532 /* Sills.mp3 */; };
+		33F5ECB61730BF000021F532 /* Kanbar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB51730BF000021F532 /* Kanbar.mp3 */; };
+		33F5ECB81730BF030021F532 /* Searles.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB71730BF030021F532 /* Searles.mp3 */; };
+		33F5ECBA1730BF1B0021F532 /* FirstYearDorms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB91730BF1B0021F532 /* FirstYearDorms.mp3 */; };
 		5C11BC921590CA9100FBF69A /* navbar-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11BC901590CA9100FBF69A /* navbar-32.png */; };
 		5C11BC931590CA9100FBF69A /* navbar-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11BC911590CA9100FBF69A /* navbar-44.png */; };
 		5C38643E1586643000544C9B /* BuildingDetailSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3864351586643000544C9B /* BuildingDetailSegue.m */; };
@@ -361,7 +375,6 @@
 
 /* Begin PBXFileReference section */
 		3307CB85172F419300A88B32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		3307CB87172F434D00A88B32 /* TaDa.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TaDa.mp3; sourceTree = "<group>"; };
 		337917E61729BDD3005D769C /* 5-0-0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-0.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E71729BDD3005D769C /* 5-0-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-1.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E81729BDD3005D769C /* 5-0-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-2.jpg"; sourceTree = SOURCE_ROOT; };
@@ -583,6 +596,21 @@
 		337918C01729BDD3005D769C /* 5-17-11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-17-11.jpg"; sourceTree = SOURCE_ROOT; };
 		33F4D694172EF81500F7A51D /* AudioAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAlerts.h; sourceTree = "<group>"; };
 		33F4D695172EF81500F7A51D /* AudioAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioAlerts.m; sourceTree = "<group>"; };
+		33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collegeHouseSystem.mp3; sourceTree = "<group>"; };
+		33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Russwurm 2.mp3"; sourceTree = "<group>"; };
+		33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MemorialHall.mp3; sourceTree = "<group>"; };
+		33F5ECA31730BEB70021F532 /* MassHall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MassHall.mp3; sourceTree = "<group>"; };
+		33F5ECA51730BEC00021F532 /* Adams.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Adams.mp3; sourceTree = "<group>"; };
+		33F5ECA71730BECD0021F532 /* HL.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HL.mp3; sourceTree = "<group>"; };
+		33F5ECA91730BED40021F532 /* GibsonHall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GibsonHall.mp3; sourceTree = "<group>"; };
+		33F5ECAB1730BEDA0021F532 /* ArtMuseum.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ArtMuseum.mp3; sourceTree = "<group>"; };
+		33F5ECAD1730BEE10021F532 /* VAC.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = VAC.mp3; sourceTree = "<group>"; };
+		33F5ECAF1730BEEC0021F532 /* Russwurm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Russwurm.mp3; sourceTree = "<group>"; };
+		33F5ECB11730BEF20021F532 /* McKeenCenter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = McKeenCenter.mp3; sourceTree = "<group>"; };
+		33F5ECB31730BEF80021F532 /* Sills.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sills.mp3; sourceTree = "<group>"; };
+		33F5ECB51730BF000021F532 /* Kanbar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Kanbar.mp3; sourceTree = "<group>"; };
+		33F5ECB71730BF030021F532 /* Searles.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Searles.mp3; sourceTree = "<group>"; };
+		33F5ECB91730BF1B0021F532 /* FirstYearDorms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstYearDorms.mp3; sourceTree = "<group>"; };
 		5C11BC901590CA9100FBF69A /* navbar-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-32.png"; path = "Images/UIImages/navbar-32.png"; sourceTree = "<group>"; };
 		5C11BC911590CA9100FBF69A /* navbar-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-44.png"; path = "Images/UIImages/navbar-44.png"; sourceTree = "<group>"; };
 		5C3864341586643000544C9B /* BuildingDetailSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuildingDetailSegue.h; path = Storyboard/BuildingDetailSegue.h; sourceTree = "<group>"; };
@@ -976,6 +1004,28 @@
 			name = "Map Tiles";
 			sourceTree = "<group>";
 		};
+		33F5EC9C1730BE8A0021F532 /* Audios */ = {
+			isa = PBXGroup;
+			children = (
+				33F5ECA51730BEC00021F532 /* Adams.mp3 */,
+				33F5ECB11730BEF20021F532 /* McKeenCenter.mp3 */,
+				33F5ECB71730BF030021F532 /* Searles.mp3 */,
+				33F5ECB31730BEF80021F532 /* Sills.mp3 */,
+				33F5ECB91730BF1B0021F532 /* FirstYearDorms.mp3 */,
+				33F5ECA31730BEB70021F532 /* MassHall.mp3 */,
+				33F5ECB51730BF000021F532 /* Kanbar.mp3 */,
+				33F5ECAF1730BEEC0021F532 /* Russwurm.mp3 */,
+				33F5ECAB1730BEDA0021F532 /* ArtMuseum.mp3 */,
+				33F5ECAD1730BEE10021F532 /* VAC.mp3 */,
+				33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */,
+				33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */,
+				33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */,
+				33F5ECA91730BED40021F532 /* GibsonHall.mp3 */,
+				33F5ECA71730BECD0021F532 /* HL.mp3 */,
+			);
+			name = Audios;
+			sourceTree = "<group>";
+		};
 		5C201660157E8F050068EA4E /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1212,7 +1262,7 @@
 		5CBA1DB2157E3E59002731CB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3307CB87172F434D00A88B32 /* TaDa.mp3 */,
+				33F5EC9C1730BE8A0021F532 /* Audios */,
 				5C887B42157E418D00FF1810 /* Graphics */,
 				D44FF8C1159CC1CA003B27CC /* ReferencePoints.plist */,
 				5CBA1DB4157E3E59002731CB /* InfoPlist.strings */,
@@ -1615,7 +1665,21 @@
 				337919991729BDD3005D769C /* 5-17-9.jpg in Resources */,
 				3379199A1729BDD3005D769C /* 5-17-10.jpg in Resources */,
 				3379199B1729BDD3005D769C /* 5-17-11.jpg in Resources */,
-				3307CB88172F434D00A88B32 /* TaDa.mp3 in Resources */,
+				33F5EC9E1730BE9B0021F532 /* collegeHouseSystem.mp3 in Resources */,
+				33F5ECA01730BEA00021F532 /* Russwurm 2.mp3 in Resources */,
+				33F5ECA21730BEB20021F532 /* MemorialHall.mp3 in Resources */,
+				33F5ECA41730BEB70021F532 /* MassHall.mp3 in Resources */,
+				33F5ECA61730BEC00021F532 /* Adams.mp3 in Resources */,
+				33F5ECA81730BECD0021F532 /* HL.mp3 in Resources */,
+				33F5ECAA1730BED40021F532 /* GibsonHall.mp3 in Resources */,
+				33F5ECAC1730BEDA0021F532 /* ArtMuseum.mp3 in Resources */,
+				33F5ECAE1730BEE10021F532 /* VAC.mp3 in Resources */,
+				33F5ECB01730BEEC0021F532 /* Russwurm.mp3 in Resources */,
+				33F5ECB21730BEF20021F532 /* McKeenCenter.mp3 in Resources */,
+				33F5ECB41730BEF80021F532 /* Sills.mp3 in Resources */,
+				33F5ECB61730BF000021F532 /* Kanbar.mp3 in Resources */,
+				33F5ECB81730BF030021F532 /* Searles.mp3 in Resources */,
+				33F5ECBA1730BF1B0021F532 /* FirstYearDorms.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

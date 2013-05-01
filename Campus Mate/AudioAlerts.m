@@ -10,6 +10,17 @@
 
 @implementation AudioAlerts
 
+
+-(void) showAlert {
+    UIAlertView *alert = [[UIAlertView alloc]
+                      initWithTitle: @"Building Audio"
+                      message: @"There is a building audio available for this building"
+                      delegate: self
+                      cancelButtonTitle:@"No Thanks"
+                      otherButtonTitles:@"Listen",nil];
+    [alert show];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (buttonIndex == 1) {
 		NSLog(@"user pressed Listen");
@@ -22,8 +33,9 @@
 
 - (void)playAudio {
     
-	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/TaDa.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
+	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Adams.mp3", [[NSBundle mainBundle] resourcePath]]];
+    
+    
 	NSError *error;
 	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	self.audioPlayer.numberOfLoops = 0;
@@ -33,11 +45,15 @@
     //[self.audioPlayer pause];
     //[self.audioPlayer stop]; // Does not reset currentTime; sending play resumes
 	
-	if (self.audioPlayer == nil)
+	if (self.audioPlayer == nil){
 		NSLog([error description]);
-	else
+    }
+	else {
 		[self.audioPlayer play];
+    }
     
 }
+
+
 
 @end

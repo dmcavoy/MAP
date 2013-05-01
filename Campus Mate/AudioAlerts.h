@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
+-(void)showAlert;
+
 @end
