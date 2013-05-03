@@ -11,8 +11,6 @@
 
 @implementation AudioAlerts
 
- /// deal with this
-
 @synthesize usersCurrentBuilding = _usersCurrentBuilding;
 
 -(void) showAlertFor:(Building *) currentBuilding {
@@ -47,13 +45,6 @@
 	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	self.audioPlayer.numberOfLoops = 0;
     self.audioPlayer.volume = 0.5; // 0.0 - no volume; 1.0 full volume
-    NSLog(@"%f seconds played so far", self.audioPlayer.currentTime);
-    
-    //Create a push/play button that comes up -> allows user to pause and then play from stop -> button should disappear when
-    // audio is done
-    //self.audioPlayer.currentTime = 10; // jump to the 10 second mark
-    //[self.audioPlayer pause];
-    //[self.audioPlayer stop]; // Does not reset currentTime; sending play resumes
 	
 	if (self.audioPlayer == nil){
 		NSLog(@"%@",[error description]);
@@ -62,7 +53,6 @@
 		[self.audioPlayer play];
         [self.delegate addAudioButton];
     }
-    
 }
 
 
@@ -133,6 +123,25 @@
             break;
     }
     
+}
+
+-(void)playAction:(id)sender{    
+    if(self.audioPlayer.playing){
+     [self.audioPlayer pause];
+     [sender setTitle:@"Play" forState:UIControlStateNormal];
+     [sender setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
+     }
+     else{
+     [self.audioPlayer play];
+     [sender setTitle:@"Pause" forState:UIControlStateNormal];
+     [sender setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
+     } 
+}
+
+-(void)playEnded{
+    if (self.audioPlayer.currentTime > self.audioPlayer.duration) {
+        [self.delegate removeButton];
+    }
 }
 
 

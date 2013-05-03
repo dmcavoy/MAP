@@ -19,9 +19,12 @@
 @interface CMMapViewController()
 {
 @private
-    BuildingButton *_lastSelectedButton;    // the last pin button the user tapped 
+    BuildingButton *_lastSelectedButton;    // the last pin button the user tapped
     NSMutableArray *_markedBuildingNames;   // list of the names of marked buildings
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
+    
+    UIButton *playButton ;
+    Building *usersLastBuilding;
     
     __weak IBOutlet UITextView *_infoView;      // view used to display credits, etc.
 }
@@ -456,29 +459,22 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 /* Base of code for method from http://stackoverflow.com/questions/1378765/how-do-i-create-a-basic-uibutton-programmatically */
 - (void)addAudioButton{    // Method for creating button, with background image and other properties
     
-    UIButton *playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     playButton.frame = CGRectMake(110.0, 360.0, 100.0, 30.0);
-    [playButton setTitle:@"Play" forState:UIControlStateNormal];
+    [playButton setTitle:@"Pause" forState:UIControlStateNormal];
+    [playButton setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
     playButton.backgroundColor = [UIColor clearColor];
-    [playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal ];
-    UIImage *buttonImageNormal = [UIImage imageNamed:@"blueButton.png"];
-    UIImage *strechableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
-    [playButton setBackgroundImage:strechableButtonImageNormal forState:UIControlStateNormal];
-    UIImage *buttonImagePressed = [UIImage imageNamed:@"whiteButton.png"];
-    UIImage *strechableButtonImagePressed = [buttonImagePressed stretchableImageWithLeftCapWidth:12 topCapHeight:0];
-    [playButton setBackgroundImage:strechableButtonImagePressed forState:UIControlStateHighlighted];
     [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playButton];
 }
 
--(IBAction)playAction:(id)sender{
-    if(self.audioAlert.audioPlayer.playing){
-        [self.audioAlert.audioPlayer pause];
-    }
-    else{
-        [self.audioAlert.audioPlayer play];
-    }
+-(void)removeButton{
+    [playButton removeFromSuperview];
 }
+
+-(IBAction)playAction:(id)sender{
+    [self.audioAlert playAction:sender];
+} 
 
 -(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
     /* get all loaded buildings from the data manager */
@@ -507,8 +503,11 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 {
     Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
     NSLog(@"%@", userBuilding.name);
-    [self.audioAlert showAlertFor:userBuilding];
-    
+    if (usersLastBuilding != userBuilding) {
+        [self.audioAlert showAlertFor:userBuilding];
+        usersLastBuilding = userBuilding;
+    }
+   
     /* convert lon/lat to x/y coordinates */
     CGPoint mapPoint = [self mapPointFromLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     
@@ -520,6 +519,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     if (!userPin) 
     {
         //[self.audioAlert showAlertFor:userBuilding];
+        
         UIImageView *newUserPin = [[UIImageView alloc] initWithImage:userPinImage];
         newUserPin.frame = CGRectMake(mapPoint.x-PinTip.x, mapPoint.y-PinTip.y, userPinImage.size.width, userPinImage.size.height);
         newUserPin.tag = @"user pin".hash;

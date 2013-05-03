@@ -15,6 +15,7 @@
 @protocol AudioAlertsDelegate <NSObject>
 
 -(void)addAudioButton;
+-(void)removeButton;
 
 @end
 
@@ -26,5 +27,7 @@
 @property (nonatomic) id <AudioAlertsDelegate> delegate;
 
 -(void)showAlertFor:(Building *) currentBuilding;
+
+-(void)playAction:(id)sender;
 
 @end
