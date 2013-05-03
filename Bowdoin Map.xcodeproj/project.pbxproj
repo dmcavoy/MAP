@@ -229,7 +229,6 @@
 		3379199B1729BDD3005D769C /* 5-17-11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918C01729BDD3005D769C /* 5-17-11.jpg */; };
 		33F4D696172EF81500F7A51D /* AudioAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D695172EF81500F7A51D /* AudioAlerts.m */; };
 		33F5EC9E1730BE9B0021F532 /* collegeHouseSystem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */; };
-		33F5ECA01730BEA00021F532 /* Russwurm 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */; };
 		33F5ECA21730BEB20021F532 /* MemorialHall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */; };
 		33F5ECA41730BEB70021F532 /* MassHall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA31730BEB70021F532 /* MassHall.mp3 */; };
 		33F5ECA61730BEC00021F532 /* Adams.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECA51730BEC00021F532 /* Adams.mp3 */; };
@@ -597,7 +596,6 @@
 		33F4D694172EF81500F7A51D /* AudioAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAlerts.h; sourceTree = "<group>"; };
 		33F4D695172EF81500F7A51D /* AudioAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioAlerts.m; sourceTree = "<group>"; };
 		33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collegeHouseSystem.mp3; sourceTree = "<group>"; };
-		33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Russwurm 2.mp3"; sourceTree = "<group>"; };
 		33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MemorialHall.mp3; sourceTree = "<group>"; };
 		33F5ECA31730BEB70021F532 /* MassHall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MassHall.mp3; sourceTree = "<group>"; };
 		33F5ECA51730BEC00021F532 /* Adams.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Adams.mp3; sourceTree = "<group>"; };
@@ -1018,7 +1016,6 @@
 				33F5ECAB1730BEDA0021F532 /* ArtMuseum.mp3 */,
 				33F5ECAD1730BEE10021F532 /* VAC.mp3 */,
 				33F5ECA11730BEB20021F532 /* MemorialHall.mp3 */,
-				33F5EC9F1730BEA00021F532 /* Russwurm 2.mp3 */,
 				33F5EC9D1730BE9B0021F532 /* collegeHouseSystem.mp3 */,
 				33F5ECA91730BED40021F532 /* GibsonHall.mp3 */,
 				33F5ECA71730BECD0021F532 /* HL.mp3 */,
@@ -1666,7 +1663,6 @@
 				3379199A1729BDD3005D769C /* 5-17-10.jpg in Resources */,
 				3379199B1729BDD3005D769C /* 5-17-11.jpg in Resources */,
 				33F5EC9E1730BE9B0021F532 /* collegeHouseSystem.mp3 in Resources */,
-				33F5ECA01730BEA00021F532 /* Russwurm 2.mp3 in Resources */,
 				33F5ECA21730BEB20021F532 /* MemorialHall.mp3 in Resources */,
 				33F5ECA41730BEB70021F532 /* MassHall.mp3 in Resources */,
 				33F5ECA61730BEC00021F532 /* Adams.mp3 in Resources */,
@@ -1784,12 +1780,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Visentin (A395E3ZTNH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Danielle McAvoy (PAVW3KEWQ9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Campus Mate/Campus Mate-Prefix.pch";
 				INFOPLIST_FILE = "Campus Mate/Campus Mate-Info.plist";
 				PRODUCT_NAME = "Bowdoin Map";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FE02A97B-70AF-4AFF-B967-A2160AAEC842";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DEEEC6ED-F475-414C-8CA8-5EC4E60C885A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1798,12 +1794,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Visentin (A395E3ZTNH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Danielle McAvoy (PAVW3KEWQ9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Campus Mate/Campus Mate-Prefix.pch";
 				INFOPLIST_FILE = "Campus Mate/Campus Mate-Info.plist";
 				PRODUCT_NAME = "Bowdoin Map";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FE02A97B-70AF-4AFF-B967-A2160AAEC842";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DEEEC6ED-F475-414C-8CA8-5EC4E60C885A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

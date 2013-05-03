@@ -150,6 +150,8 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     }    
 }
 
+
+
 /* display the details of the building at given pin */
 - (void)displayDetailsOfBuildingAtPinButton:(BuildingButton *)sender
 {
@@ -451,12 +453,34 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{}
 
 
+-(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
+    /* get all loaded buildings from the data manager */
+    NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
+    
+    Building *closestBuilding = [[Building alloc]init];
+    double sumDistance = 1000;
+    
+    for (Building *building in allBuildings)
+    {
+        double longDiff = ABS(building.longitude - currentLocation.coordinate.longitude);
+        double latDiff = ABS(building.latitude - currentLocation.coordinate.latitude);
+        double tempSum = longDiff + latDiff;
+        if (tempSum < sumDistance) {
+            sumDistance = tempSum;
+            closestBuilding = building;
+        }
+    }
+    return closestBuilding;
+}
+
 #pragma mark - CLLocationManagerDelegate methods
 
 /* update the locaion of the green pin indication the user's location */
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    [self.audioAlert showAlert];
+    Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
+    NSLog(@"%@", userBuilding.name);
+    [self.audioAlert showAlertFor:userBuilding];
     
     /* convert lon/lat to x/y coordinates */
     CGPoint mapPoint = [self mapPointFromLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
@@ -468,6 +492,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     /* if the user's location pin doesn't exist, create it. Otherwise, just change its frame */
     if (!userPin) 
     {
+        //[self.audioAlert showAlertFor:userBuilding];
         UIImageView *newUserPin = [[UIImageView alloc] initWithImage:userPinImage];
         newUserPin.frame = CGRectMake(mapPoint.x-PinTip.x, mapPoint.y-PinTip.y, userPinImage.size.width, userPinImage.size.height);
         newUserPin.tag = @"user pin".hash;

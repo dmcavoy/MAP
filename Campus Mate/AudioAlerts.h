@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "Building.h"
 
 @interface AudioAlerts : NSObject <UIAlertViewDelegate>
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) Building * usersCurrentBuilding;
 
--(void)showAlert;
+-(void)showAlertFor:(Building *) currentBuilding;
 
 @end

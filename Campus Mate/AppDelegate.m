@@ -83,8 +83,4 @@
      */
 }
 
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    NSLog(@"Got Notification %@, with Fire Date: %@", notification.alertBody, notification.fireDate);
-}
-
 @end
