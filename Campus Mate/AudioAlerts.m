@@ -42,8 +42,6 @@
 - (void)playAudio {
     
 	NSURL *url = [self pickAudioforBuiding:self.usersCurrentBuilding];
-    //[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Adams.mp3", [[NSBundle mainBundle] resourcePath]]];
-    
     
 	NSError *error;
 	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -62,9 +60,11 @@
     }
 	else {
 		[self.audioPlayer play];
+        [self.delegate addAudioButton];
     }
     
 }
+
 
 -(NSURL*)pickAudioforBuiding:(Building *)currentClosestBuilding{
     switch (currentClosestBuilding.buildingID) {

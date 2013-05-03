@@ -453,6 +453,33 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{}
 
 
+/* Base of code for method from http://stackoverflow.com/questions/1378765/how-do-i-create-a-basic-uibutton-programmatically */
+- (void)addAudioButton{    // Method for creating button, with background image and other properties
+    
+    UIButton *playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    playButton.frame = CGRectMake(110.0, 360.0, 100.0, 30.0);
+    [playButton setTitle:@"Play" forState:UIControlStateNormal];
+    playButton.backgroundColor = [UIColor clearColor];
+    [playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal ];
+    UIImage *buttonImageNormal = [UIImage imageNamed:@"blueButton.png"];
+    UIImage *strechableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    [playButton setBackgroundImage:strechableButtonImageNormal forState:UIControlStateNormal];
+    UIImage *buttonImagePressed = [UIImage imageNamed:@"whiteButton.png"];
+    UIImage *strechableButtonImagePressed = [buttonImagePressed stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    [playButton setBackgroundImage:strechableButtonImagePressed forState:UIControlStateHighlighted];
+    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:playButton];
+}
+
+-(IBAction)playAction:(id)sender{
+    if(self.audioAlert.audioPlayer.playing){
+        [self.audioAlert.audioPlayer pause];
+    }
+    else{
+        [self.audioAlert.audioPlayer play];
+    }
+}
+
 -(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
     /* get all loaded buildings from the data manager */
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
@@ -537,7 +564,9 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    self.audioAlert.delegate = self;
     
     /* get all loaded buildings from the data manager */
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
