@@ -3,8 +3,7 @@
 //  Bowdoin Map
 //
 //  Created by Danielle McAvoy on 4/29/13.
-//
-//
+
 
 #import "AudioAlerts.h"
 #import "Building.h"

@@ -3,6 +3,7 @@
 //  Campus Mate
 //
 //  Created by Stephanie Bond and Rob Visentin on 11/30/11.
+//  Editted by Dani McAvoy Spring 2013
 //  Copyright 2011 Bowdoin College All rights reserved.
 //
 

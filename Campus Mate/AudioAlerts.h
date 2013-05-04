@@ -3,8 +3,7 @@
 //  Bowdoin Map
 //
 //  Created by Danielle McAvoy on 4/29/13.
-//
-//
+
 /*
  Class that sets up the stuff for playing audios in tour mode for building with audio tours available.  Creates a play and pause button for the audios.
  */
