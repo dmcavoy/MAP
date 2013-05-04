@@ -455,27 +455,62 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{}
 
-
-/* Base of code for method from http://stackoverflow.com/questions/1378765/how-do-i-create-a-basic-uibutton-programmatically */
-- (void)addAudioButton{    // Method for creating button, with background image and other properties
+/*
+ AudioAlertDelegate Method
+ 
+ Creates the round button with pause symbol on it and that when pressed calls on a method to pause or play the audio.
+ 
+ */
+- (void)addAudioButton{    
     
-    playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    playButton.frame = CGRectMake(110.0, 360.0, 100.0, 30.0);
-    [playButton setTitle:@"Pause" forState:UIControlStateNormal];
-    [playButton setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
-    playButton.backgroundColor = [UIColor clearColor];
+    int buttonSize = 55.0;
+    int buttonInset = 10.0;
+    
+    playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+    
     [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
+    
+    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (buttonSize/2)), (self.view.bounds.size.height - buttonSize  - buttonInset), buttonSize, buttonSize);//width and height should be same value
+    
+    playButton.clipsToBounds = YES;
+    
+    playButton.layer.cornerRadius = buttonSize/2;//half of the width
+    
+    playButton.layer.borderColor=[UIColor blackColor].CGColor;
+    
+    playButton.layer.borderWidth=2.0f;
     [self.view addSubview:playButton];
-}
 
+}
+/*
+ Removes the button from the views
+ */
 -(void)removeButton{
     [playButton removeFromSuperview];
 }
 
+/*
+ Listener for the audio button. Calls a method from the 
+ audio alert to deal with playing the audio.
+ */
 -(IBAction)playAction:(id)sender{
     [self.audioAlert playAction:sender];
-} 
+}
 
+/*
+ Takes in the users current location and checks to see what building
+ the user is likely to be closest too based on the information. 
+ 
+ Param:
+ currentLocation- users location
+ 
+ Return:
+ Building - the building user is closest too
+ */
 -(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
     /* get all loaded buildings from the data manager */
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
@@ -499,13 +534,20 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 #pragma mark - CLLocationManagerDelegate methods
 
 /* update the locaion of the green pin indication the user's location */
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
-    NSLog(@"%@", userBuilding.name);
-    if (usersLastBuilding != userBuilding) {
-        [self.audioAlert showAlertFor:userBuilding];
-        usersLastBuilding = userBuilding;
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+
+    /*
+     If the user is in tour mode than check if the closest building has an audio and if it does plays it.
+     */
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tourMode"]) {
+        Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
+    
+        if (usersLastBuilding != userBuilding) {
+            usersLastBuilding = userBuilding;
+            if ([self.audioAlert hasBuildingAudioFor:userBuilding]) {
+                [self.audioAlert showAlertFor:userBuilding];
+            }
+        }
     }
    
     /* convert lon/lat to x/y coordinates */

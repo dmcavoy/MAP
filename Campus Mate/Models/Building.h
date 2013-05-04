@@ -14,6 +14,7 @@
 
 @property (nonatomic) int buildingID;
 @property (strong, nonatomic) UIImage *graphic;
+@property (strong, nonatomic) NSURL * audio;
 @property (copy, nonatomic) NSString *function;
 @property (copy, nonatomic) NSString *departments;
 @property (copy, nonatomic) NSString *name;

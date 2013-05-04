@@ -35,6 +35,37 @@
     
     /* set UIBarButtonItem tint so it shows against new UINavigationBar background */
     [[UIBarButtonItem appearance] setTintColor:[UIColor grayColor]];
+    
+    // create a standardUserDefaults variable
+    self.standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![self.standardUserDefaults valueForKey:@"tourMode"]) {
+        [self showAlert];
+    }
+   
+}
+
+-(void) showAlert {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Tour Mode"
+                          message: @"Do you want to run the application in Tour Mode?"
+                          delegate: self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes",nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 1) {
+		NSLog(@"Yes");
+        [self.standardUserDefaults setBool:YES forKey:@"tourMode"];
+        [self.standardUserDefaults synchronize];
+	}
+	else {
+		NSLog(@"No");
+        [self.standardUserDefaults setBool:NO forKey:@"tourMode"];
+        [self.standardUserDefaults synchronize];
+	}
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

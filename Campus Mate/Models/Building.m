@@ -11,6 +11,7 @@
 @implementation Building
 
 @synthesize graphic = _graphic;
+@synthesize audio = _audio;
 
 -(id)initWithID:(int)buildingID
 {
@@ -20,6 +21,7 @@
     {
         self.buildingID = buildingID;
         self.graphic = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"building-%i", self.buildingID] ofType:@"jpg"]];
+        self.audio = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/building-%i.mp3" , [[NSBundle mainBundle] resourcePath],self.buildingID]];
     }
     
     return self;
