@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3307CB86172F419300A88B32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307CB85172F419300A88B32 /* AVFoundation.framework */; };
+		3330E8F31734BF7F00DE5557 /* DirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3330E8F21734BF7F00DE5557 /* DirectionsViewController.m */; };
 		337918C11729BDD3005D769C /* 5-0-0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E61729BDD3005D769C /* 5-0-0.jpg */; };
 		337918C21729BDD3005D769C /* 5-0-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E71729BDD3005D769C /* 5-0-1.jpg */; };
 		337918C31729BDD3005D769C /* 5-0-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E81729BDD3005D769C /* 5-0-2.jpg */; };
@@ -390,6 +391,8 @@
 
 /* Begin PBXFileReference section */
 		3307CB85172F419300A88B32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3330E8F11734BF7F00DE5557 /* DirectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsViewController.h; sourceTree = "<group>"; };
+		3330E8F21734BF7F00DE5557 /* DirectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsViewController.m; sourceTree = "<group>"; };
 		337917E61729BDD3005D769C /* 5-0-0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-0.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E71729BDD3005D769C /* 5-0-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-1.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E81729BDD3005D769C /* 5-0-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-2.jpg"; sourceTree = SOURCE_ROOT; };
@@ -1246,6 +1249,8 @@
 			children = (
 				5C3864441586644300544C9B /* CMBuildingDetailViewController.h */,
 				5C3864451586644300544C9B /* CMBuildingDetailViewController.m */,
+				3330E8F11734BF7F00DE5557 /* DirectionsViewController.h */,
+				3330E8F21734BF7F00DE5557 /* DirectionsViewController.m */,
 				5C3864461586644300544C9B /* CMMapViewController.h */,
 				5C3864471586644300544C9B /* CMMapViewController.m */,
 				33F4D694172EF81500F7A51D /* AudioAlerts.h */,
@@ -1766,6 +1771,7 @@
 				D49D813C15B483270007A528 /* CMSelfAdjustingTextView.m in Sources */,
 				D4D5E22916AD966300C9630C /* CMMapView.m in Sources */,
 				33F4D696172EF81500F7A51D /* AudioAlerts.m in Sources */,
+				3330E8F31734BF7F00DE5557 /* DirectionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

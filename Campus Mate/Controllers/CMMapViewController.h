@@ -19,7 +19,7 @@
 
 @class Building;
 
-@interface CMMapViewController : UIViewController <AudioAlertsDelegate, UIScrollViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
+@interface CMMapViewController : UIViewController <AudioAlertsDelegate, UIScrollViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate, AVAudioPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;  // the scroll view used to scroll around the map
 @property (strong, nonatomic) CMMapView *map;                 // the view (backed by a CATiledLayer) displaying the map image

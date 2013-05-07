@@ -29,6 +29,7 @@
                       otherButtonTitles:@"Listen",nil];
     
     self.usersCurrentBuilding = currentBuilding;
+
     
     [alert show];
 }
@@ -56,7 +57,7 @@
 	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	self.audioPlayer.numberOfLoops = 0;
     self.audioPlayer.volume = 0.5; // 0.0 - no volume; 1.0 full volume
-	
+	self.audioPlayer.delegate = self;
 	if (self.audioPlayer == nil){
 		NSLog(@"%@",[error description]);
     }
@@ -146,6 +147,9 @@
     }
 }
 
-
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self.delegate removeButton];
+}
 
 @end

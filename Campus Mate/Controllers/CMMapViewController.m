@@ -532,6 +532,14 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     return closestBuilding;
 }
 
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"here");
+    //if (self.audioPlayer.currentTime > self.audioPlayer.duration) {
+    [self removeButton];
+    //}
+}
+
+
 #pragma mark - CLLocationManagerDelegate methods
 
 /* update the locaion of the green pin indication the user's location */
@@ -610,6 +618,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     [super viewDidLoad];
     
     self.audioAlert.delegate = self;
+    self.audioAlert.audioPlayer.delegate = self;
     
     /* get all loaded buildings from the data manager */
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];

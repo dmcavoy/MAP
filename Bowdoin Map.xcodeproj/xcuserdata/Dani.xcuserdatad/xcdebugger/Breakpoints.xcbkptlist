@@ -11,22 +11,9 @@
          timestampString = "389314464.862659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "534"
-         endingLineNumber = "534"
-         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Campus Mate/Controllers/CMMapViewController.m"
-         timestampString = "389314464.862659"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "529"
          endingLineNumber = "529"
-         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
+         landmarkName = "-findClosestBuildingtoLocation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

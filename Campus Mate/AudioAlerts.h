@@ -14,7 +14,7 @@
 
 @class AudioAlerts;
 
-@protocol AudioAlertsDelegate <NSObject>
+@protocol AudioAlertsDelegate <NSObject, AVAudioPlayerDelegate>
 
 /*
  Should set up the button and put it up on the view for the user.  It also links it to a selector.
@@ -28,7 +28,7 @@
 
 @end
 
-@interface AudioAlerts : NSObject <UIAlertViewDelegate>
+@interface AudioAlerts : NSObject <UIAlertViewDelegate, AVAudioPlayerDelegate>
 
 // Audio player for building audios
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
