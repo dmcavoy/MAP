@@ -37,12 +37,12 @@
 #pragma mark - UIAlertView methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == 1) {
-		NSLog(@"User Pressed Listen");
+	// User pressed listen
+    if (buttonIndex == 1) {
         [self playAudio];
 	}
+    // User pressed No Thanks
 	else {
-		NSLog(@"User Pressed No Thanks");
 	}
 }
 

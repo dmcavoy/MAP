@@ -71,6 +71,8 @@
     rootViewFrame.size.height = self.scrollView.contentSize.height;
     [self.scrollView.delegate viewForZoomingInScrollView:self.scrollView].frame = rootViewFrame;
     
+    // HERE IS WHERE WE WOULD MAKE IT LOOK BETTER!!!
+    
     /* place the feedback view at the bottom of the scrollview content */
     CGRect feedbackFrame = _feedbackView.frame;
     feedbackFrame.origin.y = MAX(self.scrollView.frame.size.height, self.scrollView.contentSize.height) - feedbackFrame.size.height;
@@ -162,6 +164,22 @@
         [mvc markBuilding:self.building];
         [mvc zoomToBuilding:self.building];
     }
+    else if ([segue.identifier isEqualToString:@"giveDirections"])
+    {
+        CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+        
+        /* first, unmark all the marked buildings on the map */
+        for (NSString *buildingName in mvc.markedBuildings)
+        {
+            [mvc unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
+        }
+        
+        /* then, mark this building and zoom to it on the map */
+        [mvc markBuilding:self.building];
+        // get current location and draw line between
+        // current location and selected building
+        [mvc zoomToBuilding:self.building];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -228,5 +246,10 @@
 {
     return YES;
 }
+
+-(IBAction)getDirections:(id)sender{
+    NSLog(@"directions");
+}
+
 
 @end
