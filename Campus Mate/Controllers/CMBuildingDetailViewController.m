@@ -181,10 +181,15 @@
         [mvc markBuilding:self.building];
         
         // get current location and draw line between
-        [mvc drawDirectionsTo:self.building];
+        Building* usersCurrentBuilding =[mvc drawDirectionsTo:self.building];
         
-        // current location and selected building
-        //[mvc zoomToBuilding:self.building];
+        // FIX: MAKE ZOOM TO DIRECTIONS FUNCTION!
+        
+        /* create an array of destination and closest building to the
+         users so that we can use the zoomToShowBuildings */
+        NSArray * buildings = [NSArray arrayWithObjects: self.building, usersCurrentBuilding , nil];
+        
+        [mvc zoomToShowBuildings:buildings];
     }
 }
 

@@ -19,12 +19,12 @@
 /*
  Should set up the button and put it up on the view for the user.  It also links it to a selector.
  */
--(void)addAudioButton;
+-(void)addAudioButtons;
 
 /*
  Remove the button from the user view.
  */
--(void)removeButton;
+-(void)removeAudioButtons;
 
 @end
 
@@ -34,6 +34,9 @@
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
 @property (nonatomic) id <AudioAlertsDelegate> delegate;
+
+// BOOL to keep track is audio is already in use
+@property (nonatomic) BOOL alreadyAudio;
 
 /*
  Method which creates an alert for a building 
@@ -70,5 +73,12 @@
  
  */
 -(BOOL)hasBuildingAudioFor:(Building *)building;
+
+
+/*
+ Method that stops the audio from playing and then
+ removes the audio buttons from the view.
+ */
+-(void)stopAudioPlayer;
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3307CB86172F419300A88B32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307CB85172F419300A88B32 /* AVFoundation.framework */; };
+		3313B21B173AA8F9002F99B5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 3313B21A173AA8F9002F99B5 /* stop.png */; };
 		337918C11729BDD3005D769C /* 5-0-0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E61729BDD3005D769C /* 5-0-0.jpg */; };
 		337918C21729BDD3005D769C /* 5-0-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E71729BDD3005D769C /* 5-0-1.jpg */; };
 		337918C31729BDD3005D769C /* 5-0-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E81729BDD3005D769C /* 5-0-2.jpg */; };
@@ -391,6 +392,7 @@
 
 /* Begin PBXFileReference section */
 		3307CB85172F419300A88B32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3313B21A173AA8F9002F99B5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		337917E61729BDD3005D769C /* 5-0-0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-0.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E71729BDD3005D769C /* 5-0-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-1.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E81729BDD3005D769C /* 5-0-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-2.jpg"; sourceTree = SOURCE_ROOT; };
@@ -1041,6 +1043,7 @@
 			isa = PBXGroup;
 			children = (
 				33DA6292173446A1008BAA1E /* pause.png */,
+				3313B21A173AA8F9002F99B5 /* stop.png */,
 				33DA6294173446A6008BAA1E /* play.png */,
 				33F5ECA51730BEC00021F532 /* building-7.mp3 */,
 				33F5ECB91730BF1B0021F532 /* building-9.mp3 */,
@@ -1745,6 +1748,7 @@
 				33DA628D173438E0008BAA1E /* building-72.mp3 in Resources */,
 				33DA6293173446A2008BAA1E /* pause.png in Resources */,
 				33DA6295173446A7008BAA1E /* play.png in Resources */,
+				3313B21B173AA8F9002F99B5 /* stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

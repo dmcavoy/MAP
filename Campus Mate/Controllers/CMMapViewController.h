@@ -37,7 +37,7 @@
 - (void)dropPinAtBuilding:(Building *)building;     // drop a pin button on the location of the given building on the map
 - (IBAction)toggleSearchBar;                        // toggle the search bar popover
 - (IBAction)toggleInfo;                             // toggle the view displaying credits, etc.
-
--(void)drawDirectionsTo:(Building*)destination;
+-(Building *)drawDirectionsTo:(Building*)destination;
+    // draws a line between destiantion building and user location
     
 @end

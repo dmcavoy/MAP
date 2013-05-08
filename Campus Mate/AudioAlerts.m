@@ -21,6 +21,7 @@
 // creates alert and shows it
 -(void) showAlertFor:(Building *) currentBuilding {
     
+    self.alreadyAudio = YES;
     UIAlertView *alert = [[UIAlertView alloc]
                       initWithTitle: @"Building Audio"
                       message:[NSString stringWithFormat: @"There is a building audio available for %@", currentBuilding.name]
@@ -43,6 +44,7 @@
 	}
     // User pressed No Thanks
 	else {
+        self.alreadyAudio = NO;
 	}
 }
 
@@ -63,7 +65,7 @@
     }
 	else {
 		[self.audioPlayer play];
-        [self.delegate addAudioButton];
+        [self.delegate addAudioButtons];
     }
 }
 
@@ -140,16 +142,20 @@
      } 
 }
 
-// Not used: Need to find a way to alert audio ended
--(void)playEnded{
-    if (self.audioPlayer.currentTime > self.audioPlayer.duration) {
-        [self.delegate removeButton];
-    }
+// stop audio and remove audio buttons
+-(void)stopAudioPlayer{
+    self.alreadyAudio = NO;
+    [self.audioPlayer stop];
+    [self.delegate removeAudioButtons];
 }
 
+/*
+ If the audio plays all the way through then dismiss the audio player and its buttons.
+ */
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    [self.delegate removeButton];
+    self.alreadyAudio = NO;
+    [self.delegate removeAudioButtons];
 }
 
 @end

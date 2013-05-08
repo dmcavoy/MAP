@@ -27,10 +27,11 @@
     NSMutableArray *_markedBuildingNames;   // list of the names of marked buildings
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
     
-    UIButton *playButton ;
-    UIButton *dismissButton;
-    DirectionsView * directions;
-    Building *usersLastBuilding;
+    UIButton *playButton ; // audio play/pause
+    UIButton *stopButton;  // audio stop
+    UIButton *dismissButton;  // directions dismiss button
+    DirectionsView * directions; // view with directions line
+    Building *usersLastBuilding; // users last building
     
     __weak IBOutlet UITextView *_infoView;      // view used to display credits, etc.
 }
@@ -158,20 +159,33 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         [button setFrame:frame];
     }    
 }
-
--(void)drawDirectionsTo:(Building*) destination{
+/*
+ Takes the destination building and the users current location and creates a directionsView which draws a yellow line between the two buildings and adds a button which allows you to dismiss the directions.
+ 
+ Param:
+ destination - The building user wants directions to
+ 
+ Return:
+ building - returns the users closest building (semi hack for zooming to show the directions: FIX)
+ */
+-(Building *)drawDirectionsTo:(Building*) destination{
     
     CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
     CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
+    
     directions= [[DirectionsView alloc]initWithFrame:self.map.frame];
     directions.start = startPoint;
     directions.destination = destinationPoint;
+    
     [self.map addSubview:directions];
+    
     [self addDismissDirectionsButton];
-    //[directions setNeedsDisplay];
+    
+    return[self findClosestBuildingtoLocation:_locationManager.location];
 }
-
-
+/*
+  Creates a round button that will dismiss the directions from the view. Puts it in a location that will not conflict with the audio buttons so be careful if changing the location of this button. (See addAudioButtons)
+ */
 - (void)addDismissDirectionsButton{
     
      dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -179,27 +193,27 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     [dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
     
     [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
-    
     [dismissButton setBackgroundColor:[UIColor blackColor]];
     
     dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
     dismissButton.clipsToBounds = YES;
-    
     dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    
     dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
-    
     dismissButton.layer.borderWidth=2.0f;
     
     [self.view addSubview:dismissButton];
     
 }
+
+/*
+ Responder to the dismissButton being pressed. Deletes the directionsView (the yellow line) and removes the dismissButton.
+ */
 -(IBAction)deleteDirections:(id)sender{
     [directions removeFromSuperview];
     directions = nil;
-    [dismissButton removeFromSuperview];
     
+    [dismissButton removeFromSuperview];
 }
 
 /* display the details of the building at given pin */
@@ -506,9 +520,10 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  AudioAlertDelegate Method
  
  Creates the round button with pause symbol on it and that when pressed calls on a method to pause or play the audio.
+ Also creates a round stop button with stop symbol that when pressed will stop the audio and delete the buttons.
  
  */
-- (void)addAudioButton{    
+- (void)addAudioButtons{
     
     playButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -521,20 +536,43 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
     playButton.clipsToBounds = YES;
-    
     playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    
     playButton.layer.borderColor=[UIColor blackColor].CGColor;
-    
     playButton.layer.borderWidth=2.0f;
     [self.view addSubview:playButton];
+    
+    
+    stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [stopButton setImage:[UIImage imageNamed:@"stop.png"] forState:UIControlStateNormal];
+    
+    [stopButton addTarget:self action:@selector(stopAudio:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [stopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    
+    stopButton.frame = CGRectMake(playButton.frame.origin.x - BUTTON_SIZE - 10, playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    
+    stopButton.clipsToBounds = YES;
+    stopButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    stopButton.layer.borderColor=[UIColor blackColor].CGColor;
+    stopButton.layer.borderWidth=2.0f;
+    
+    [self.view addSubview:stopButton];
 
 }
 /*
  Removes the button from the views
  */
--(void)removeButton{
+-(void)removeAudioButtons{
     [playButton removeFromSuperview];
+    [stopButton removeFromSuperview];
+}
+
+/*
+ Calls the audio player to stop the audio and remove the buttons from view.
+ */
+-(IBAction)stopAudio:(id)sender{
+    [self.audioAlert stopAudioPlayer];
 }
 
 /*
@@ -572,6 +610,13 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
             closestBuilding = building;
         }
     }
+    
+    // FIX : Trying to keep it from presenting audios before you are actually near a building
+    if (sumDistance > 200) {
+        NSLog(@"TOO FAR FROM CLOSEST BUILDING");
+        return nil;
+    }
+    NSLog(@"Closest building is %@", closestBuilding.name);
     return closestBuilding;
 }
 
@@ -581,17 +626,23 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 
     /*
-     If the user is in tour mode than check if the closest building has an audio and if it does plays it.
+     If the user is in tour mode and there isn't already an audio alert in process than check if the closest building has an audio and if it does plays it.
      */
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tourMode"]) {
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tourMode"] && !self.audioAlert.alreadyAudio) {
         Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
     
-        if (usersLastBuilding != userBuilding) {
+        // if not close enough to a building don't show anything
+        if ((usersLastBuilding != userBuilding)&& userBuilding) {
             usersLastBuilding = userBuilding;
             if ([self.audioAlert hasBuildingAudioFor:userBuilding]) {
                 [self.audioAlert showAlertFor:userBuilding];
             }
         }
+    }
+    
+    // FIX: MEANT FOR DEBUGGING TO MAKE SURE WE AREN'T GETTING REPEATS
+    else if(self.audioAlert.alreadyAudio){
+        NSLog(@"Prevented from putting up second audio");
     }
    
     /* convert lon/lat to x/y coordinates */
