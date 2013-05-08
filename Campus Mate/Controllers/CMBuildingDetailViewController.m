@@ -180,16 +180,8 @@
         /* then, mark this building and zoom to it on the map */
         [mvc markBuilding:self.building];
         
-        // get current location and draw line between
-        Building* usersCurrentBuilding =[mvc drawDirectionsTo:self.building];
-        
-        // FIX: MAKE ZOOM TO DIRECTIONS FUNCTION!
-        
-        /* create an array of destination and closest building to the
-         users so that we can use the zoomToShowBuildings */
-        NSArray * buildings = [NSArray arrayWithObjects: self.building, usersCurrentBuilding , nil];
-        
-        [mvc zoomToShowBuildings:buildings];
+        // draw directions and zoom to correct location on view
+        [mvc drawDirectionsTo:self.building];
     }
 }
 

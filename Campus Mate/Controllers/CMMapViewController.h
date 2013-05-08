@@ -34,10 +34,13 @@
 - (void)unmarkBuilding:(Building *)building;        // set a given building as unmarked
 - (void)zoomToBuilding:(Building *)building;        // zoom to a given building
 - (void)zoomToShowBuildings:(NSArray *)buildings;   // zoom to display the smallest bounding box in which all given buildings are visible
+- (void)zoomToDirectionsForBuilding:(CGPoint)destination andLocation:(CGPoint )userLocation;
+    // zoom to show the whole line for directions
 - (void)dropPinAtBuilding:(Building *)building;     // drop a pin button on the location of the given building on the map
 - (IBAction)toggleSearchBar;                        // toggle the search bar popover
 - (IBAction)toggleInfo;                             // toggle the view displaying credits, etc.
--(Building *)drawDirectionsTo:(Building*)destination;
+
+-(void)drawDirectionsTo:(Building*)destination;
     // draws a line between destiantion building and user location
     
 @end

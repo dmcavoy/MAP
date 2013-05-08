@@ -160,15 +160,13 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     }    
 }
 /*
- Takes the destination building and the users current location and creates a directionsView which draws a yellow line between the two buildings and adds a button which allows you to dismiss the directions.
+ Takes the destination building and the users current location and creates a directionsView which draws a yellow line between the two buildings and adds a button which allows you to dismiss the directions. After everything has been added it then calls the zoom function for directions in order to zoom to the buildings.
  
  Param:
  destination - The building user wants directions to
  
- Return:
- building - returns the users closest building (semi hack for zooming to show the directions: FIX)
  */
--(Building *)drawDirectionsTo:(Building*) destination{
+-(void)drawDirectionsTo:(Building*) destination{
     
     CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
     CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
@@ -181,7 +179,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     
     [self addDismissDirectionsButton];
     
-    return[self findClosestBuildingtoLocation:_locationManager.location];
+    [self zoomToDirectionsForBuilding:destinationPoint andLocation:startPoint];
 }
 /*
   Creates a round button that will dismiss the directions from the view. Puts it in a location that will not conflict with the audio buttons so be careful if changing the location of this button. (See addAudioButtons)
@@ -289,6 +287,42 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         maxX = fmaxf(maxX, buildingPoint.x);
         maxY = fmaxf(maxY, buildingPoint.y);
     }
+    
+    /* how much "padding" to add to the box in the x and y directions */
+    CGFloat offsetX = self.view.frame.size.width / 16.0f;
+    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
+    
+    /* create the bounding box */
+    CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));
+    
+    /* zoom to the bounding box and reset the max zoom scale */
+    [self.scrollView zoomToRect:boundingBox animated:NO];
+    self.scrollView.maximumZoomScale = savedMaxZoomScale;
+}
+
+/* zoom the map to dislay the smallest bounding box in which you can see the line for the directions from the users current location
+ 
+    Param:
+    destination- Building location as map CGPoint
+    userlocation- Users current location as a map CGPoitn
+ 
+ */
+- (void)zoomToDirectionsForBuilding:(CGPoint)destination andLocation:(CGPoint )userLocation
+{
+    /* save the max zoom scale, then set it to 1. We don't want the map zooming too far in if the bounding box is small */
+    float savedMaxZoomScale = self.scrollView.maximumZoomScale;
+    self.scrollView.maximumZoomScale = 1.0f;
+    
+    CGFloat minX = self.scrollView.contentSize.width / self.scrollView.zoomScale;
+    CGFloat minY = self.scrollView.contentSize.height / self.scrollView.zoomScale;
+    CGFloat maxX = 0.0f;
+    CGFloat maxY = 0.0f;
+    
+    /* find the min and max x and y to construct the bounding box */
+    minX = fminf(destination.x, userLocation.x);
+    minY = fminf(destination.y, userLocation.y);
+    maxX = fmaxf(destination.x, userLocation.x);
+    maxY = fmaxf(destination.y, userLocation.y);
     
     /* how much "padding" to add to the box in the x and y directions */
     CGFloat offsetX = self.view.frame.size.width / 16.0f;
