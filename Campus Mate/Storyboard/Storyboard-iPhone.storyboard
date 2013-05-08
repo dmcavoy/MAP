@@ -262,7 +262,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="getDirections:" destination="ll1-zc-XHi" eventType="touchUpInside" id="Nhu-sk-2Je"/>
                                             <segue destination="KFq-eh-UH4" kind="push" identifier="giveDirections" id="gVA-6n-SCh"/>
                                         </connections>
                                     </button>
@@ -309,40 +308,6 @@
             <point key="canvasLocation" x="459" y="637"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="getDirections:"/>
-                <relationship kind="action" name="sendFeedback"/>
-                <relationship kind="action" name="toggleZoomScale"/>
-                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
-            </relationships>
-        </class>
-        <class className="CMMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="toggleInfo"/>
-                <relationship kind="action" name="toggleSearchBar"/>
-                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CMSelfAdjustingTextView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
-        </class>
-        <class className="CMTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

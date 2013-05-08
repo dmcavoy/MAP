@@ -166,7 +166,10 @@
     }
     else if ([segue.identifier isEqualToString:@"giveDirections"])
     {
-        CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+        
+        // This works for this segue but not the findOnMap segue
+        // the reason is unknown right now
+        CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
         
         /* first, unmark all the marked buildings on the map */
         for (NSString *buildingName in mvc.markedBuildings)
@@ -176,9 +179,12 @@
         
         /* then, mark this building and zoom to it on the map */
         [mvc markBuilding:self.building];
+        
         // get current location and draw line between
+        [mvc drawDirectionsTo:self.building];
+        
         // current location and selected building
-        [mvc zoomToBuilding:self.building];
+        //[mvc zoomToBuilding:self.building];
     }
 }
 
@@ -247,9 +253,6 @@
     return YES;
 }
 
--(IBAction)getDirections:(id)sender{
-    NSLog(@"directions");
-}
 
 
 @end

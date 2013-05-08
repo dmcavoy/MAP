@@ -15,6 +15,9 @@
 #import "Building.h"
 #import "BuildingButton.h"
 
+#define BUTTON_SIZE 75
+#define BUTTON_INSET 50
+
 
 /* private interface */
 @interface CMMapViewController()
@@ -25,6 +28,8 @@
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
     
     UIButton *playButton ;
+    UIButton *dismissButton;
+    DirectionsView * directions;
     Building *usersLastBuilding;
     
     __weak IBOutlet UITextView *_infoView;      // view used to display credits, etc.
@@ -154,7 +159,48 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     }    
 }
 
+-(void)drawDirectionsTo:(Building*) destination{
+    
+    CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
+    CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
+    directions= [[DirectionsView alloc]initWithFrame:self.map.frame];
+    directions.start = startPoint;
+    directions.destination = destinationPoint;
+    [self.map addSubview:directions];
+    [self addDismissDirectionsButton];
+    //[directions setNeedsDisplay];
+}
 
+
+- (void)addDismissDirectionsButton{
+    
+     dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    
+    [dismissButton setBackgroundColor:[UIColor blackColor]];
+    
+    dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    
+    dismissButton.clipsToBounds = YES;
+    
+    dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    
+    dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
+    
+    dismissButton.layer.borderWidth=2.0f;
+    
+    [self.view addSubview:dismissButton];
+    
+}
+-(IBAction)deleteDirections:(id)sender{
+    [directions removeFromSuperview];
+    directions = nil;
+    [dismissButton removeFromSuperview];
+    
+}
 
 /* display the details of the building at given pin */
 - (void)displayDetailsOfBuildingAtPinButton:(BuildingButton *)sender
@@ -172,7 +218,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 /* mark the given building */
 - (void)markBuilding:(Building *)building
-{    
+{
     /* retrieve the pin button associated with the building */
     BuildingButton *toMark = (BuildingButton *)[self.view viewWithTag:[building hash]];
     
@@ -464,9 +510,6 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  */
 - (void)addAudioButton{    
     
-    int buttonSize = 55.0;
-    int buttonInset = 10.0;
-    
     playButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
@@ -475,11 +518,11 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     
     [playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
     
-    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (buttonSize/2)), (self.view.bounds.size.height - buttonSize  - buttonInset), buttonSize, buttonSize);//width and height should be same value
+    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
     playButton.clipsToBounds = YES;
     
-    playButton.layer.cornerRadius = buttonSize/2;//half of the width
+    playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
     
     playButton.layer.borderColor=[UIColor blackColor].CGColor;
     
@@ -560,9 +603,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     
     /* if the user's location pin doesn't exist, create it. Otherwise, just change its frame */
     if (!userPin) 
-    {
-        //[self.audioAlert showAlertFor:userBuilding];
-        
+    {        
         UIImageView *newUserPin = [[UIImageView alloc] initWithImage:userPinImage];
         newUserPin.frame = CGRectMake(mapPoint.x-PinTip.x, mapPoint.y-PinTip.y, userPinImage.size.width, userPinImage.size.height);
         newUserPin.tag = @"user pin".hash;
@@ -571,6 +612,12 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     else 
     {
         userPin.frame = CGRectMake(mapPoint.x-PinTip.x, mapPoint.y-PinTip.y, userPinImage.size.width, userPinImage.size.height);
+    }
+    
+    //update the directions
+    if (directions) {
+        directions.start = mapPoint;
+        [directions setNeedsDisplay];
     }
 }
 

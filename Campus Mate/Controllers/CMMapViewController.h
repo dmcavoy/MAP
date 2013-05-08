@@ -16,6 +16,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CMMapView.h"
 #import "AudioAlerts.h"
+#import "DirectionsView.h"
 
 @class Building;
 
@@ -36,5 +37,7 @@
 - (void)dropPinAtBuilding:(Building *)building;     // drop a pin button on the location of the given building on the map
 - (IBAction)toggleSearchBar;                        // toggle the search bar popover
 - (IBAction)toggleInfo;                             // toggle the view displaying credits, etc.
+
+-(void)drawDirectionsTo:(Building*)destination;
     
 @end
