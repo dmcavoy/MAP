@@ -159,60 +159,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         [button setFrame:frame];
     }    
 }
-/*
- Takes the destination building and the users current location and creates a directionsView which draws a yellow line between the two buildings and adds a button which allows you to dismiss the directions. After everything has been added it then calls the zoom function for directions in order to zoom to the buildings.
- 
- Param:
- destination - The building user wants directions to
- 
- */
--(void)drawDirectionsTo:(Building*) destination{
-    
-    CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
-    CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
-    
-    directions= [[DirectionsView alloc]initWithFrame:self.map.frame];
-    directions.start = startPoint;
-    directions.destination = destinationPoint;
-    
-    [self.map addSubview:directions];
-    
-    [self addDismissDirectionsButton];
-    
-    [self zoomToDirectionsForBuilding:destinationPoint andLocation:startPoint];
-}
-/*
-  Creates a round button that will dismiss the directions from the view. Puts it in a location that will not conflict with the audio buttons so be careful if changing the location of this button. (See addAudioButtons)
- */
-- (void)addDismissDirectionsButton{
-    
-     dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
-    [dismissButton setBackgroundColor:[UIColor blackColor]];
-    
-    dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
-    
-    dismissButton.clipsToBounds = YES;
-    dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
-    dismissButton.layer.borderWidth=2.0f;
-    
-    [self.view addSubview:dismissButton];
-    
-}
 
-/*
- Responder to the dismissButton being pressed. Deletes the directionsView (the yellow line) and removes the dismissButton.
- */
--(IBAction)deleteDirections:(id)sender{
-    [directions removeFromSuperview];
-    directions = nil;
-    
-    [dismissButton removeFromSuperview];
-}
 
 /* display the details of the building at given pin */
 - (void)displayDetailsOfBuildingAtPinButton:(BuildingButton *)sender
@@ -260,81 +207,6 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     }
 }
 
-/* zoom the map to a given building */
-- (void)zoomToBuilding:(Building *)building
-{       
-    [self zoomToShowBuildings:[NSArray arrayWithObject:building]];  
-}
-
-/* zoom the map to dislay the smallest bounding box in which all given buildings are visible */
-- (void)zoomToShowBuildings:(NSArray *)buildings
-{
-    /* save the max zoom scale, then set it to 1. We don't want the map zooming too far in if the bounding box is small */
-    float savedMaxZoomScale = self.scrollView.maximumZoomScale;
-    self.scrollView.maximumZoomScale = 1.0f;
-    
-    CGFloat minX = self.scrollView.contentSize.width / self.scrollView.zoomScale;
-    CGFloat minY = self.scrollView.contentSize.height / self.scrollView.zoomScale;
-    CGFloat maxX = 0.0f;
-    CGFloat maxY = 0.0f;
-    
-    /* find the min and max x and y of the building locations to construct the bounding box */
-    for (Building *building in buildings) 
-    {
-        CGPoint buildingPoint = [self mapPointFromLatitude:building.latitude longitude:building.longitude];
-        minX = fminf(minX, buildingPoint.x);
-        minY = fminf(minY, buildingPoint.y);
-        maxX = fmaxf(maxX, buildingPoint.x);
-        maxY = fmaxf(maxY, buildingPoint.y);
-    }
-    
-    /* how much "padding" to add to the box in the x and y directions */
-    CGFloat offsetX = self.view.frame.size.width / 16.0f;
-    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
-    
-    /* create the bounding box */
-    CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));
-    
-    /* zoom to the bounding box and reset the max zoom scale */
-    [self.scrollView zoomToRect:boundingBox animated:NO];
-    self.scrollView.maximumZoomScale = savedMaxZoomScale;
-}
-
-/* zoom the map to dislay the smallest bounding box in which you can see the line for the directions from the users current location
- 
-    Param:
-    destination- Building location as map CGPoint
-    userlocation- Users current location as a map CGPoitn
- 
- */
-- (void)zoomToDirectionsForBuilding:(CGPoint)destination andLocation:(CGPoint )userLocation
-{
-    /* save the max zoom scale, then set it to 1. We don't want the map zooming too far in if the bounding box is small */
-    float savedMaxZoomScale = self.scrollView.maximumZoomScale;
-    self.scrollView.maximumZoomScale = 1.0f;
-    
-    CGFloat minX = self.scrollView.contentSize.width / self.scrollView.zoomScale;
-    CGFloat minY = self.scrollView.contentSize.height / self.scrollView.zoomScale;
-    CGFloat maxX = 0.0f;
-    CGFloat maxY = 0.0f;
-    
-    /* find the min and max x and y to construct the bounding box */
-    minX = fminf(destination.x, userLocation.x);
-    minY = fminf(destination.y, userLocation.y);
-    maxX = fmaxf(destination.x, userLocation.x);
-    maxY = fmaxf(destination.y, userLocation.y);
-    
-    /* how much "padding" to add to the box in the x and y directions */
-    CGFloat offsetX = self.view.frame.size.width / 16.0f;
-    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
-    
-    /* create the bounding box */
-    CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));
-    
-    /* zoom to the bounding box and reset the max zoom scale */
-    [self.scrollView zoomToRect:boundingBox animated:NO];
-    self.scrollView.maximumZoomScale = savedMaxZoomScale;
-}
 
 /* convert from a GPS lat/lon to a coordinate on our map image. Algorithm provided by Andrew Currier of Bowdoin IT */
 - (CGPoint)mapPointFromLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude
@@ -492,6 +364,208 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
          }];
     }
 }
+#pragma mark - Zooming methods
+
+/* zoom the map to a given building */
+- (void)zoomToBuilding:(Building *)building
+{
+    [self zoomToShowBuildings:[NSArray arrayWithObject:building]];
+}
+
+/* zoom the map to dislay the smallest bounding box in which all given buildings are visible */
+- (void)zoomToShowBuildings:(NSArray *)buildings
+{
+    /* save the max zoom scale, then set it to 1. We don't want the map zooming too far in if the bounding box is small */
+    float savedMaxZoomScale = self.scrollView.maximumZoomScale;
+    self.scrollView.maximumZoomScale = 1.0f;
+    
+    CGFloat minX = self.scrollView.contentSize.width / self.scrollView.zoomScale;
+    CGFloat minY = self.scrollView.contentSize.height / self.scrollView.zoomScale;
+    CGFloat maxX = 0.0f;
+    CGFloat maxY = 0.0f;
+    
+    /* find the min and max x and y of the building locations to construct the bounding box */
+    for (Building *building in buildings)
+    {
+        CGPoint buildingPoint = [self mapPointFromLatitude:building.latitude longitude:building.longitude];
+        minX = fminf(minX, buildingPoint.x);
+        minY = fminf(minY, buildingPoint.y);
+        maxX = fmaxf(maxX, buildingPoint.x);
+        maxY = fmaxf(maxY, buildingPoint.y);
+    }
+    
+    /* how much "padding" to add to the box in the x and y directions */
+    CGFloat offsetX = self.view.frame.size.width / 16.0f;
+    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
+    
+    /* create the bounding box */
+    CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));
+    
+    /* zoom to the bounding box and reset the max zoom scale */
+    [self.scrollView zoomToRect:boundingBox animated:NO];
+    self.scrollView.maximumZoomScale = savedMaxZoomScale;
+}
+
+/* zoom the map to dislay the smallest bounding box in which you can see the line for the directions from the users current location
+ 
+ Param:
+ destination- Building location as map CGPoint
+ userlocation- Users current location as a map CGPoitn
+ 
+ */
+- (void)zoomToDirectionsForBuilding:(CGPoint)destination andLocation:(CGPoint )userLocation
+{
+    /* save the max zoom scale, then set it to 1. We don't want the map zooming too far in if the bounding box is small */
+    float savedMaxZoomScale = self.scrollView.maximumZoomScale;
+    self.scrollView.maximumZoomScale = 1.0f;
+    
+    CGFloat minX = self.scrollView.contentSize.width / self.scrollView.zoomScale;
+    CGFloat minY = self.scrollView.contentSize.height / self.scrollView.zoomScale;
+    CGFloat maxX = 0.0f;
+    CGFloat maxY = 0.0f;
+    
+    /* find the min and max x and y to construct the bounding box */
+    minX = fminf(destination.x, userLocation.x);
+    minY = fminf(destination.y, userLocation.y);
+    maxX = fmaxf(destination.x, userLocation.x);
+    maxY = fmaxf(destination.y, userLocation.y);
+    
+    /* how much "padding" to add to the box in the x and y directions */
+    CGFloat offsetX = self.view.frame.size.width / 16.0f;
+    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
+    
+    /* create the bounding box */
+    CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));
+    
+    /* zoom to the bounding box and reset the max zoom scale */
+    [self.scrollView zoomToRect:boundingBox animated:NO];
+    self.scrollView.maximumZoomScale = savedMaxZoomScale;
+}
+
+
+#pragma mark - DirectionsView methods
+/*
+ Takes the destination building and the users current location and creates a directionsView which draws a yellow line between the two buildings and adds a button which allows you to dismiss the directions. After everything has been added it then calls the zoom function for directions in order to zoom to the buildings.
+ 
+ Param:
+ destination - The building user wants directions to
+ 
+ */
+-(void)drawDirectionsTo:(Building*) destination{
+    
+    CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
+    CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
+    
+    directions= [[DirectionsView alloc]initWithFrame:self.map.frame];
+    directions.start = startPoint;
+    directions.destination = destinationPoint;
+    
+    [self.map addSubview:directions];
+    
+    [self addDismissDirectionsButton];
+    
+    [self zoomToDirectionsForBuilding:destinationPoint andLocation:startPoint];
+}
+/*
+ Creates a round button that will dismiss the directions from the view. Puts it in a location that will not conflict with the audio buttons so be careful if changing the location of this button. (See addAudioButtons)
+ */
+- (void)addDismissDirectionsButton{
+    
+    dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [dismissButton setBackgroundColor:[UIColor blackColor]];
+    
+    dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    
+    dismissButton.clipsToBounds = YES;
+    dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
+    dismissButton.layer.borderWidth=2.0f;
+    
+    [self.view addSubview:dismissButton];
+    
+}
+
+/*
+ Responder to the dismissButton being pressed. Deletes the directionsView (the yellow line) and removes the dismissButton.
+ */
+-(IBAction)deleteDirections:(id)sender{
+    [directions removeFromSuperview];
+    directions = nil;
+    
+    [dismissButton removeFromSuperview];
+}
+#pragma mark - AudioAlert methods
+/*
+ AudioAlertDelegate Method
+ 
+ Creates the round button with pause symbol on it and that when pressed calls on a method to pause or play the audio.
+ Also creates a round stop button with stop symbol that when pressed will stop the audio and delete the buttons.
+ 
+ */
+- (void)addAudioButtons{
+    
+    playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+    
+    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
+    
+    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    
+    playButton.clipsToBounds = YES;
+    playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    playButton.layer.borderColor=[UIColor blackColor].CGColor;
+    playButton.layer.borderWidth=2.0f;
+    [self.view addSubview:playButton];
+    
+    
+    stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [stopButton setImage:[UIImage imageNamed:@"stop.png"] forState:UIControlStateNormal];
+    
+    [stopButton addTarget:self action:@selector(stopAudio:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [stopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    
+    stopButton.frame = CGRectMake(playButton.frame.origin.x - BUTTON_SIZE - 10, playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    
+    stopButton.clipsToBounds = YES;
+    stopButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    stopButton.layer.borderColor=[UIColor blackColor].CGColor;
+    stopButton.layer.borderWidth=2.0f;
+    
+    [self.view addSubview:stopButton];
+    
+}
+
+/*
+ Removes the button from the views
+ */
+-(void)removeAudioButtons{
+    [playButton removeFromSuperview];
+    [stopButton removeFromSuperview];
+}
+
+/*
+ Calls the audio player to stop the audio and remove the buttons from view.
+ */
+-(IBAction)stopAudio:(id)sender{
+    [self.audioAlert stopAudioPlayer];
+}
+
+/*
+ Listener for the audio button. Calls a method from the
+ audio alert to deal with playing the audio.
+ */
+-(IBAction)playAction:(id)sender{
+    [self.audioAlert playAction:sender];
+}
 
 #pragma mark - UISearchBarDelegate methods
 
@@ -550,110 +624,6 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{}
 
-/*
- AudioAlertDelegate Method
- 
- Creates the round button with pause symbol on it and that when pressed calls on a method to pause or play the audio.
- Also creates a round stop button with stop symbol that when pressed will stop the audio and delete the buttons.
- 
- */
-- (void)addAudioButtons{
-    
-    playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
-    
-    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
-    
-    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
-    
-    playButton.clipsToBounds = YES;
-    playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    playButton.layer.borderColor=[UIColor blackColor].CGColor;
-    playButton.layer.borderWidth=2.0f;
-    [self.view addSubview:playButton];
-    
-    
-    stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [stopButton setImage:[UIImage imageNamed:@"stop.png"] forState:UIControlStateNormal];
-    
-    [stopButton addTarget:self action:@selector(stopAudio:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [stopButton setTitle:@"Stop" forState:UIControlStateNormal];
-    
-    stopButton.frame = CGRectMake(playButton.frame.origin.x - BUTTON_SIZE - 10, playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
-    
-    stopButton.clipsToBounds = YES;
-    stopButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    stopButton.layer.borderColor=[UIColor blackColor].CGColor;
-    stopButton.layer.borderWidth=2.0f;
-    
-    [self.view addSubview:stopButton];
-
-}
-/*
- Removes the button from the views
- */
--(void)removeAudioButtons{
-    [playButton removeFromSuperview];
-    [stopButton removeFromSuperview];
-}
-
-/*
- Calls the audio player to stop the audio and remove the buttons from view.
- */
--(IBAction)stopAudio:(id)sender{
-    [self.audioAlert stopAudioPlayer];
-}
-
-/*
- Listener for the audio button. Calls a method from the 
- audio alert to deal with playing the audio.
- */
--(IBAction)playAction:(id)sender{
-    [self.audioAlert playAction:sender];
-}
-
-/*
- Takes in the users current location and checks to see what building
- the user is likely to be closest too based on the information. 
- 
- Param:
- currentLocation- users location
- 
- Return:
- Building - the building user is closest too
- */
--(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
-    /* get all loaded buildings from the data manager */
-    NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
-    
-    Building *closestBuilding = [[Building alloc]init];
-    double sumDistance = 1000;
-    
-    for (Building *building in allBuildings)
-    {
-        double longDiff = ABS(building.longitude - currentLocation.coordinate.longitude);
-        double latDiff = ABS(building.latitude - currentLocation.coordinate.latitude);
-        double tempSum = longDiff + latDiff;
-        if (tempSum < sumDistance) {
-            sumDistance = tempSum;
-            closestBuilding = building;
-        }
-    }
-    
-    // FIX : Trying to keep it from presenting audios before you are actually near a building
-    if (sumDistance > 200) {
-        NSLog(@"TOO FAR FROM CLOSEST BUILDING");
-        return nil;
-    }
-    NSLog(@"Closest building is %@", closestBuilding.name);
-    return closestBuilding;
-}
-
 #pragma mark - CLLocationManagerDelegate methods
 
 /* update the locaion of the green pin indication the user's location */
@@ -704,6 +674,43 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         directions.start = mapPoint;
         [directions setNeedsDisplay];
     }
+}
+
+/*
+ Takes in the users current location and checks to see what building
+ the user is likely to be closest too based on the information.
+ 
+ Param:
+ currentLocation- users location
+ 
+ Return:
+ Building - the building user is closest too
+ */
+-(Building *)findClosestBuildingtoLocation:(CLLocation *)currentLocation{
+    /* get all loaded buildings from the data manager */
+    NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
+    
+    Building *closestBuilding = [[Building alloc]init];
+    double sumDistance = 1000;
+    
+    for (Building *building in allBuildings)
+    {
+        double longDiff = ABS(building.longitude - currentLocation.coordinate.longitude);
+        double latDiff = ABS(building.latitude - currentLocation.coordinate.latitude);
+        double tempSum = longDiff + latDiff;
+        if (tempSum < sumDistance) {
+            sumDistance = tempSum;
+            closestBuilding = building;
+        }
+    }
+    
+    // FIX : Trying to keep it from presenting audios before you are actually near a building
+    if (sumDistance > 200) {
+        NSLog(@"TOO FAR FROM CLOSEST BUILDING");
+        return nil;
+    }
+    NSLog(@"Closest building is %@", closestBuilding.name);
+    return closestBuilding;
 }
 
 #pragma mark - View lifecycle

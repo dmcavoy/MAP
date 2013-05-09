@@ -14,18 +14,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        // make it see-through
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-- (void)awakeFromNib
-{
-    
-}
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+/*
+ Draws a yellow line that will connet the two pins.
+ */
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
@@ -37,8 +34,6 @@
 	CGContextAddLineToPoint(currentContext, self.destination.x, self.destination.y);
 	CGContextStrokePath(currentContext);
 	UIGraphicsPopContext();
-
-    
 }
 
 

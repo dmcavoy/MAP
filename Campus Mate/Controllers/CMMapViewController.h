@@ -10,6 +10,8 @@
  * buildings on the map may have pins associated with them that, when tapped, display more information about that building
  * marked buildings have pins of a different color than unmarked buildings
  * the user can also search for a building(s) using the search bar
+ * The user in tour mode with be notified with alerts if an audio is available 
+ * and the audio has buttons which control it.
  */
 
 #import <UIKit/UIKit.h>
@@ -26,8 +28,7 @@
 @property (strong, nonatomic) CMMapView *map;                 // the view (backed by a CATiledLayer) displaying the map image
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (copy, nonatomic) NSArray *markedBuildings;           // names of buildings that are marked (usually because of a search)
-
-@property(strong, nonatomic)AudioAlerts * audioAlert;
+@property(strong, nonatomic)AudioAlerts * audioAlert;  // the tour audio controller
 
 - (CGPoint)mapPointFromLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (void)markBuilding:(Building *)building;          // set a given building as marked
@@ -39,7 +40,6 @@
 - (void)dropPinAtBuilding:(Building *)building;     // drop a pin button on the location of the given building on the map
 - (IBAction)toggleSearchBar;                        // toggle the search bar popover
 - (IBAction)toggleInfo;                             // toggle the view displaying credits, etc.
-
 -(void)drawDirectionsTo:(Building*)destination;
     // draws a line between destiantion building and user location
     
