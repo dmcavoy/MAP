@@ -166,10 +166,22 @@
     }
     else if ([segue.identifier isEqualToString:@"giveDirections"])
     {
+        // has to be this and not destination otherwise it gets rid of the
+        // subviews (aka buttons and etc.)
+       //CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
         
         // This works for this segue but not the findOnMap segue
         // the reason is unknown right now
         CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
+
+        
+        //NSLog( @"%f",mvc.view.frame.origin.x);
+        //NSLog( @"%f",mvc.view.frame.origin.x);
+        //NSLog( @"%f",mvc.view.frame.size.height);
+        //NSLog( @"%f",mvc.view.frame.size.width);
+        
+        //mvc1.view.frame = mvc.view.frame;
+
         
         /* first, unmark all the marked buildings on the map */
         for (NSString *buildingName in mvc.markedBuildings)
@@ -180,8 +192,10 @@
         /* then, mark this building and zoom to it on the map */
         [mvc markBuilding:self.building];
         
+        
         // draw directions and zoom to correct location on view
         [mvc drawDirectionsTo:self.building];
+        
     }
 }
 
@@ -250,6 +264,42 @@
     return YES;
 }
 
+-(IBAction)directions:(id)sender{
+    
+    // has to be this and not destination otherwise it gets rid of the
+    // subviews (aka buttons and etc.)
+    CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    
+    // This works for this segue but not the findOnMap segue
+    // the reason is unknown right now
+    //CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
+    
+    
+    //NSLog( @"%f",mvc.view.frame.origin.x);
+    //NSLog( @"%f",mvc.view.frame.origin.x);
+    //NSLog( @"%f",mvc.view.frame.size.height);
+    //NSLog( @"%f",mvc.view.frame.size.width);
+    
+    //mvc1.view.frame = mvc.view.frame;
+    
+    
+    /* first, unmark all the marked buildings on the map */
+    for (NSString *buildingName in mvc.markedBuildings)
+    {
+        [mvc unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
+    }
+    
+    /* then, mark this building and zoom to it on the map */
+    [mvc markBuilding:self.building];
+    
+    
+    // draw directions and zoom to correct location on view
+    [mvc drawDirectionsTo:self.building];
+    
+    if(mvc.audioAlert.alreadyAudio){
+        [mvc addAudioButtons];
+    }
+}
 
 
 @end

@@ -223,18 +223,18 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" id="F1S-kD-x6Q" userLabel="feedback view">
-                                        <rect key="frame" x="276" y="892" width="217" height="68"/>
+                                        <rect key="frame" x="276" y="872" width="217" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="See a problem with this information?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pdA-EF-9CC">
-                                                <rect key="frame" x="0.0" y="27" width="217" height="21"/>
+                                                <rect key="frame" x="0.0" y="47" width="217" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lUt-0O-KwQ">
-                                                <rect key="frame" x="51" y="44" width="115" height="21"/>
+                                                <rect key="frame" x="51" y="64" width="115" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.024850730330000001" green="0.34219780399999999" blue="0.94650135869999996" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="12"/>
@@ -247,7 +247,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pb2-Se-G93">
-                                                <rect key="frame" x="1" y="0.0" width="215" height="28"/>
+                                                <rect key="frame" x="1" y="5" width="215" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
                                                 <state key="normal" title="Get Directions To Building">
@@ -258,7 +258,8 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="74H-zn-wFB" kind="push" identifier="giveDirections" id="7ln-P6-Usg"/>
+                                                    <action selector="directions:" destination="ZvL-5l-X2x" eventType="touchUpInside" id="xTp-wA-9XA"/>
+                                                    <segue destination="74H-zn-wFB" kind="custom" identifier="giveDirections" customClass="FindOnMapSegue" id="7ln-P6-Usg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -306,48 +307,13 @@
             <point key="canvasLocation" x="983" y="1193"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sendFeedback"/>
-                <relationship kind="action" name="toggleZoomScale"/>
-                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
-            </relationships>
-        </class>
-        <class className="CMMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteDirections:"/>
-                <relationship kind="action" name="playAction:"/>
-                <relationship kind="action" name="toggleInfo"/>
-                <relationship kind="action" name="toggleSearchBar"/>
-                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CMSelfAdjustingTextView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
-        </class>
-        <class className="CMTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7ln-P6-Usg"/>
+        <segue reference="QZd-vo-wqd"/>
         <segue reference="Ty4-Pu-82y"/>
     </inferredMetricsTieBreakers>
 </document>

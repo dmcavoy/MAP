@@ -452,7 +452,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  
  */
 -(void)drawDirectionsTo:(Building*) destination{
-    
+
     CGPoint startPoint = [self mapPointFromLatitude:_locationManager.location.coordinate.latitude longitude:_locationManager.location.coordinate.longitude];
     CGPoint destinationPoint = [self mapPointFromLatitude:destination.latitude longitude:destination.longitude];
     
@@ -493,6 +493,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  Responder to the dismissButton being pressed. Deletes the directionsView (the yellow line) and removes the dismissButton.
  */
 -(IBAction)deleteDirections:(id)sender{
+    
     [directions removeFromSuperview];
     directions = nil;
     
@@ -733,7 +734,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     
     self.scrollView.zoomScale = fmaxf(self.scrollView.zoomScale, self.scrollView.minimumZoomScale); 
     
-    [_locationManager startUpdatingLocation];    
+    [_locationManager startUpdatingLocation];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
