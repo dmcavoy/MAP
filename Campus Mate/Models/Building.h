@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Professor.h"
 
 @interface Building : NSObject 
 
@@ -21,6 +22,7 @@
 @property (copy, nonatomic) NSString *description;
 @property (copy, nonatomic) NSString *address;
 @property (copy, nonatomic) NSString *hours;
+@property (nonatomic) Professor *professors;
 @property (nonatomic) CLLocationDegrees latitude;
 @property (nonatomic) CLLocationDegrees longitude;
 

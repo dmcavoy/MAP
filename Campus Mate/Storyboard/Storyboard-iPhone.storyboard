@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="piW-HI-5z8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="piW-HI-5z8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -308,12 +308,158 @@
             </objects>
             <point key="canvasLocation" x="459" y="637"/>
         </scene>
+        <!--Professor Detail View Controller-->
+        <scene sceneID="0ty-Ss-mNf">
+            <objects>
+                <viewController id="L4M-5F-FSc" customClass="CMProfessorDetailViewController" sceneMemberID="viewController">
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vAT-ic-Hol">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="yOv-FS-nwM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Professor Details" id="yvE-7w-qki">
+                                        <barButtonItem key="rightBarButtonItem" title="Find On Map" id="wtP-XI-cP4"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" id="T0z-lQ-Gqd">
+                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Professor name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nxu-He-F46">
+                                        <rect key="frame" x="20" y="20" width="175" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RzB-ba-bc6">
+                                        <rect key="frame" x="20" y="70" width="156" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u68-cQ-btE">
+                                        <rect key="frame" x="20" y="120" width="156" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="e-mail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YLa-Yj-r2g">
+                                        <rect key="frame" x="20" y="170" width="156" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="buZ-Um-FI6" appends="YES" id="eyb-nN-TJl"/>
+                        </connections>
+                    </scrollView>
+                    <connections>
+                        <outlet property="addressLabel" destination="u68-cQ-btE" id="euu-Dt-bJQ"/>
+                        <outlet property="departmentLabel" destination="RzB-ba-bc6" id="OYp-gg-7Tv"/>
+                        <outlet property="emailLabel" destination="YLa-Yj-r2g" id="NaG-Gh-Lvq"/>
+                        <outlet property="profNameLabel" destination="nxu-He-F46" id="Y9u-9d-oUM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zcc-4h-0lN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="buZ-Um-FI6">
+                    <connections>
+                        <action selector="toggleScrollView:" destination="L4M-5F-FSc" id="5i3-Fj-t81"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1250" y="989"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="w7M-od-duu">
+            <objects>
+                <viewController id="3Rf-ef-jvE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8e8-l6-l6D">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="Dwr-kb-dis">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Choose A Search Option" id="Dq9-j1-Hk0"/>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSJ-u5-1T8">
+                                <rect key="frame" x="37" y="147" width="241" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Find a Building">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oyc-Vp-6vB">
+                                <rect key="frame" x="37" y="284" width="241" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Find a Professor">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ybo-7s-3BH" kind="push" id="jNY-BR-TAA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8sy-50-a3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911" y="405"/>
+        </scene>
+        <!--Prof View Controller-->
+        <scene sceneID="ZwE-dE-iTe">
+            <objects>
+                <tableViewController id="ybo-7s-3BH" customClass="CMProfViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XtE-ib-eKJ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableFooterView" contentMode="redraw" id="JMH-sv-Vug">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="ybo-7s-3BH" id="bFr-DD-uus"/>
+                            <outlet property="delegate" destination="ybo-7s-3BH" id="kre-cY-bsq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Nja-B7-2li"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vu7-oY-40w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1370" y="352"/>
+        </scene>
     </scenes>
     <classes>
         <class className="CMBuildingDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="getDirections:"/>
                 <relationship kind="action" name="sendFeedback"/>
                 <relationship kind="action" name="toggleZoomScale"/>
                 <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
@@ -330,10 +476,24 @@
         <class className="CMMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
             <relationships>
+                <relationship kind="action" name="playAction:"/>
                 <relationship kind="action" name="toggleInfo"/>
                 <relationship kind="action" name="toggleSearchBar"/>
                 <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="CMProfViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfViewController.h"/>
+        </class>
+        <class className="CMProfessorDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="toggleScrollView:"/>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profNameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="CMSelfAdjustingTextView" superclassName="UIView">

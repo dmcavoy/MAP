@@ -16,7 +16,7 @@
 
 @property (copy, nonatomic, readonly) NSArray *buildings;       // the buildings stored in the data manager
 @property (copy, nonatomic, readonly) NSArray *referencePoints; // the reference points stored in the data manager
-
+@property (copy, nonatomic, readonly) NSArray *professors;
 + (CMDataManager *)defaultManager;  // returns the static default manager
 
 #pragma mark - loading data                         
