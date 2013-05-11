@@ -147,6 +147,30 @@
 
 #pragma mark - view lifecycle
 
+/*
+ If the user is already listening to an audio we need to make sure they don't try to get directions otherwise the audios buttons will disappear and get messed up.
+ */
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    if (mvc.audioAlert.alreadyAudio && [identifier isEqualToString:@"giveDirections"]) {
+        [self alertNoDirectionsWithAudio];
+        return NO;
+    }
+    return YES;
+}
+/*
+ Alerts user that they can't get directions while already listening to an audio.
+ */
+-(void)alertNoDirectionsWithAudio{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Can't Show Directions"
+                          message: @"Directions are not allowed while listening to an audio. Please stop the audio or wait for it to finish to get directions "
+                          delegate: self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     /* perform a segue to "find" a building on the map. This wil highlight and zoom to the building's location */

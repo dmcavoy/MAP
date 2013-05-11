@@ -812,6 +812,29 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     self.scrollView.minimumZoomScale = fmaxf(self.view.bounds.size.height/(self.scrollView.contentSize.height/self.scrollView.zoomScale), self.view.bounds.size.width/(self.scrollView.contentSize.width/self.scrollView.zoomScale));
     
     self.scrollView.zoomScale = fmaxf(self.scrollView.zoomScale, self.scrollView.minimumZoomScale);
+    
+    [self updateAudioButtonLocations];
+    [self updateDismissButtonLocation];
+    
+}
+/*
+ Update the location of the dismiss button
+ */
+-(void)updateDismissButtonLocation{
+    if (dismissButton) {
+        // different than when created because of nav bar
+        dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET+ self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    }
+}
+/*
+ Update the location of the stop and play buttons.
+ */ 
+-(void)updateAudioButtonLocations{
+    // playButton and stopButton go togeter
+    if (self.audioAlert.playButton) {
+        self.audioAlert.playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+        self.audioAlert.stopButton.frame = CGRectMake(self.audioAlert.playButton.frame.origin.x - BUTTON_SIZE - 10, self.audioAlert.playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    }
 }
 
 /* all orientations supported for iOS 6.0 or later */

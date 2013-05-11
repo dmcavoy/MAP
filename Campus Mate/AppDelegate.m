@@ -42,7 +42,7 @@
     
     // If first time opened set ask the user if they want tour mode
     if (![self.standardUserDefaults valueForKey:@"tourMode"]) {
-        [self showAlert];
+        [self showAlertTourMode];
     }
    
 }
@@ -51,15 +51,16 @@
  Creates and shows the alerts for setting up the user default tour mode.
  */
 
--(void) showAlert {
+-(void) showAlertTourMode {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Tour Mode"
-                          message: @" Tour Mode will give you alerts when their are audio tours available for the building your are near. \n \n Do you want to run the application in Tour Mode? "
+                          initWithTitle: @"Tour Mode?"
+                          message: @" Tour Mode will give you alerts when their are audio tours available for the building you are near. It works best when you are outside. \n \n Do you want to run the application in Tour Mode? "
                           delegate: self
                           cancelButtonTitle:@"No"
                           otherButtonTitles:@"Yes",nil];
     [alert show];
 }
+
 
 /*
   Method that responds to the tour mode alert view. Sets up the user default.
