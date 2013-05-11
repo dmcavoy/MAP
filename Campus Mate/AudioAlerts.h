@@ -35,6 +35,9 @@
 
 @property (nonatomic) id <AudioAlertsDelegate> delegate;
 
+@property(strong, nonatomic) UIButton *playButton;
+@property(strong, nonatomic) UIButton *stopButton;
+
 // BOOL to keep track is audio is already in use
 @property (nonatomic) BOOL alreadyAudio;
 

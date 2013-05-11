@@ -259,7 +259,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="directions:" destination="ll1-zc-XHi" eventType="touchUpInside" id="Mud-YM-uda"/>
                                                     <segue destination="KFq-eh-UH4" kind="push" identifier="giveDirections" id="ZoQ-ij-egh"/>
                                                 </connections>
                                             </button>

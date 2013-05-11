@@ -258,7 +258,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="directions:" destination="ZvL-5l-X2x" eventType="touchUpInside" id="xTp-wA-9XA"/>
                                                     <segue destination="74H-zn-wFB" kind="custom" identifier="giveDirections" customClass="FindOnMapSegue" id="7ln-P6-Usg"/>
                                                 </connections>
                                             </button>
@@ -313,7 +312,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="QZd-vo-wqd"/>
+        <segue reference="7ln-P6-Usg"/>
         <segue reference="Ty4-Pu-82y"/>
     </inferredMetricsTieBreakers>
 </document>

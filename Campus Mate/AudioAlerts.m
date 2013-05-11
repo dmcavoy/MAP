@@ -17,6 +17,11 @@
 
 @synthesize usersCurrentBuilding = _usersCurrentBuilding;
 
+-(void)initWithAudioPlayer:(AVAudioPlayer *)audioPlayer andPlayButton:(UIButton*)playButton andStopButton: (UIButton*)stopButton{
+    self.audioPlayer = audioPlayer;
+    self.playButton = playButton;
+    self.stopButton = stopButton;
+}
 
 // creates alert and shows it
 -(void) showAlertFor:(Building *) currentBuilding {
@@ -88,6 +93,7 @@
 }
 
 // Checks if building has audio
+// need to update list if new buildings get audio files
 -(BOOL)hasBuildingAudioFor:(Building *)building{
     switch (building.buildingID) {
         case 7:
@@ -96,28 +102,44 @@
         case 16:
         case 18:
         case 22:
+        case 23:
+        case 28:
+        case 32:
         case 33:
         case 38:
         case 40:
+        case 42:
         case 44:
+        case 45:
         case 46:
         case 49:
         case 50:
+        case 52:
         case 53:
         case 54:
         case 55:
         case 59:
+        case 60:
         case 62:
         case 65:
+        case 66:
+        case 67:
         case 68:
         case 71:
         case 72:
         case 75:
+        case 76:
         case 78:
         case 79:
+        case 81:
+        case 84:
+        case 85:
         case 86:
+        case 87:
         case 88:
+        case 89:
         case 90:
+        case 91:
             return YES;
             break;
         default:

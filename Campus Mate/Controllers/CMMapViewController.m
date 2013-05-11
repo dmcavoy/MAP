@@ -27,8 +27,6 @@
     NSMutableArray *_markedBuildingNames;   // list of the names of marked buildings
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
     
-    UIButton *playButton ; // audio play/pause
-    UIButton *stopButton;  // audio stop
     UIButton *dismissButton;  // directions dismiss button
     DirectionsView * directions; // view with directions line
     Building *usersLastBuilding; // users last building
@@ -509,39 +507,39 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  */
 - (void)addAudioButtons{
     
-    playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.audioAlert.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+    [self.audioAlert.playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
     
-    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.audioAlert.playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
+    [self.audioAlert.playButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
     
-    playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    self.audioAlert.playButton.frame = CGRectMake(((self.view.bounds.size.width/2) - (BUTTON_SIZE/2)), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET + self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
-    playButton.clipsToBounds = YES;
-    playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    playButton.layer.borderColor=[UIColor blackColor].CGColor;
-    playButton.layer.borderWidth=2.0f;
-    [self.view addSubview:playButton];
+    self.audioAlert.playButton.clipsToBounds = YES;
+    self.audioAlert.playButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    self.audioAlert.playButton.layer.borderColor=[UIColor blackColor].CGColor;
+    self.audioAlert.playButton.layer.borderWidth=2.0f;
+    [self.view addSubview:self.audioAlert.playButton];
     
     
-    stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.audioAlert.stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [stopButton setImage:[UIImage imageNamed:@"stop.png"] forState:UIControlStateNormal];
+    [self.audioAlert.stopButton setImage:[UIImage imageNamed:@"stop.png"] forState:UIControlStateNormal];
     
-    [stopButton addTarget:self action:@selector(stopAudio:) forControlEvents:UIControlEventTouchUpInside];
+    [self.audioAlert.stopButton addTarget:self action:@selector(stopAudio:) forControlEvents:UIControlEventTouchUpInside];
     
-    [stopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    [self.audioAlert.stopButton setTitle:@"Stop" forState:UIControlStateNormal];
     
-    stopButton.frame = CGRectMake(playButton.frame.origin.x - BUTTON_SIZE - 10, playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    self.audioAlert.stopButton.frame = CGRectMake(self.audioAlert.playButton.frame.origin.x - BUTTON_SIZE - 10, self.audioAlert.playButton.frame.origin.y, BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
-    stopButton.clipsToBounds = YES;
-    stopButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    stopButton.layer.borderColor=[UIColor blackColor].CGColor;
-    stopButton.layer.borderWidth=2.0f;
+    self.audioAlert.stopButton.clipsToBounds = YES;
+    self.audioAlert.stopButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    self.audioAlert.stopButton.layer.borderColor=[UIColor blackColor].CGColor;
+    self.audioAlert.stopButton.layer.borderWidth=2.0f;
     
-    [self.view addSubview:stopButton];
+    [self.view addSubview:self.audioAlert.stopButton];
     
 }
 
@@ -549,8 +547,8 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  Removes the button from the views
  */
 -(void)removeAudioButtons{
-    [playButton removeFromSuperview];
-    [stopButton removeFromSuperview];
+    [self.audioAlert.playButton removeFromSuperview];
+    [self.audioAlert.stopButton removeFromSuperview];
 }
 
 /*
@@ -635,6 +633,9 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
      */
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tourMode"] && !self.audioAlert.alreadyAudio) {
         Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
+        
+        NSLog(@"Users Last Building: %@",usersLastBuilding.name);
+        NSLog(@"Users Current Building: %@",userBuilding.name);
     
         // if not close enough to a building don't show anything
         if ((usersLastBuilding != userBuilding)&& userBuilding) {
@@ -643,11 +644,6 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
                 [self.audioAlert showAlertFor:userBuilding];
             }
         }
-    }
-    
-    // FIX: MEANT FOR DEBUGGING TO MAKE SURE WE AREN'T GETTING REPEATS
-    else if(self.audioAlert.alreadyAudio){
-        NSLog(@"Prevented from putting up second audio");
     }
    
     /* convert lon/lat to x/y coordinates */
@@ -670,11 +666,11 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         userPin.frame = CGRectMake(mapPoint.x-PinTip.x, mapPoint.y-PinTip.y, userPinImage.size.width, userPinImage.size.height);
     }
     
-    //update the directions
+   //update line as user moves
     if (directions) {
         directions.start = mapPoint;
         [directions setNeedsDisplay];
-    }
+    } 
 }
 
 /*

@@ -164,39 +164,43 @@
         [mvc markBuilding:self.building];
         [mvc zoomToBuilding:self.building];
     }
+    
     else if ([segue.identifier isEqualToString:@"giveDirections"])
     {
-        // has to be this and not destination otherwise it gets rid of the
-        // subviews (aka buttons and etc.)
-       //CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+        // have to use this view controller to keep up the audio
+        // player if it is upx
+        CMMapViewController *mvc1 = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
         
-        // This works for this segue but not the findOnMap segue
-        // the reason is unknown right now
+        // Will only call drawRect for directions view with this
+        // view controller
         CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
+        
+        
+        // THIS IS A HACK! Something seemed to be wrong with
+        // the way map kit worked and the subview of the buttons
+        // were disappearing.... this seems to fix it... bad coding
+        // if it can be fixed please do so
+        if(mvc1.audioAlert.alreadyAudio){
+            mvc.audioAlert = mvc1.audioAlert;
+            [mvc addAudioButtons];
+            mvc.audioAlert.alreadyAudio = YES;
+        }
 
         
-        //NSLog( @"%f",mvc.view.frame.origin.x);
-        //NSLog( @"%f",mvc.view.frame.origin.x);
-        //NSLog( @"%f",mvc.view.frame.size.height);
-        //NSLog( @"%f",mvc.view.frame.size.width);
-        
-        //mvc1.view.frame = mvc.view.frame;
-
-        
-        /* first, unmark all the marked buildings on the map */
+        // first, unmark all the marked buildings on the map 
         for (NSString *buildingName in mvc.markedBuildings)
         {
             [mvc unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
         }
         
-        /* then, mark this building and zoom to it on the map */
+        //then, mark this building and zoom to it on the map 
         [mvc markBuilding:self.building];
         
         
-        // draw directions and zoom to correct location on view
+        //draw directions and zoom to correct location on view
         [mvc drawDirectionsTo:self.building];
         
-    }
+    } 
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -264,42 +268,11 @@
     return YES;
 }
 
+/*
 -(IBAction)directions:(id)sender{
-    
-    // has to be this and not destination otherwise it gets rid of the
-    // subviews (aka buttons and etc.)
-    CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    
-    // This works for this segue but not the findOnMap segue
-    // the reason is unknown right now
-    //CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
-    
-    
-    //NSLog( @"%f",mvc.view.frame.origin.x);
-    //NSLog( @"%f",mvc.view.frame.origin.x);
-    //NSLog( @"%f",mvc.view.frame.size.height);
-    //NSLog( @"%f",mvc.view.frame.size.width);
-    
-    //mvc1.view.frame = mvc.view.frame;
-    
-    
-    /* first, unmark all the marked buildings on the map */
-    for (NSString *buildingName in mvc.markedBuildings)
-    {
-        [mvc unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
-    }
-    
-    /* then, mark this building and zoom to it on the map */
-    [mvc markBuilding:self.building];
-    
-    
-    // draw directions and zoom to correct location on view
-    [mvc drawDirectionsTo:self.building];
-    
-    if(mvc.audioAlert.alreadyAudio){
-        [mvc addAudioButtons];
-    }
+    // created to help possibly solve the directions problem use if helpful
 }
+ */
 
 
 @end
