@@ -59,9 +59,17 @@
 {
     return [_buildingsByName objectForKey:buildingName];
 }
--(NSString *)professorNamed:(Professor *)professor
+-(Professor *)professorNamed:(NSString *)name
 {
-    return professor.name;
+    NSArray *allProfs = [[CMDataManager defaultManager] professorSort];
+    for(Professor *professor in allProfs)
+    {
+            if([professor.name isEqualToString:name])
+            {
+                return professor;
+            }
+    }
+    return nil;
 }
 -(NSString *)professorsBuilding:(Professor *)professor
 {
@@ -253,8 +261,7 @@ static CMDataManager *defaultManager = nil;
         [[NSUserDefaults standardUserDefaults] synchronize];
     
     }
-    NSLog(@"loaded %d professors for building: %@", [_professorsByBuilding count], pBuilding);
-    
+
     _professorsByBuilding = [NSMutableArray arrayWithArray:[self professorSort]];
     
 }

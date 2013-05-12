@@ -58,6 +58,6 @@
 
 -(NSString *)professorsBuilding:(Professor *)professor;
 
--(NSString *)professorNamed:(Professor *)professor;
+-(Professor *)professorNamed:(NSString *)professor;
 
 @end

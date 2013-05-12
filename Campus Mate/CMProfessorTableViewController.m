@@ -16,6 +16,8 @@
     NSMutableDictionary *_professorNamesBySection;  //professor names stored using table view sections as keys
     NSArray *_sections;                              //sections in table view
     NSString *_selectedRowTitle;                    //name of selected professor
+    NSDictionary *_searchResultsProfessorNamesBySection; //profs in search results table view
+    NSArray *_searchResultsSections; //sections in the search results table view
 }
 
 @end
@@ -36,16 +38,53 @@
 
 -(void)initialize
 {
-    _professorNamesBySection = [NSMutableDictionary dictionaryWithCapacity:[professors count]];
+    /* each section is the group of buildings whose name begins with that letter of the alphabet */
+    NSString *alphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    _professorNamesBySection = [NSMutableDictionary dictionaryWithCapacity:[alphabet length]];
     _sections = [NSArray array];
-    /* each section becomes a key in the dictionary and the corresponding value will be the last names of the professors in that section */
-    for(Professor *professor in professors)
+    
+    for(int i = 0; i < [alphabet length]; i++)
     {
-        [_professorNamesBySection setObject:professor forKey:professor.name];
+        [_professorNamesBySection setObject:[NSMutableArray array] forKey:[alphabet substringWithRange:NSMakeRange(i, 1)]];
     }
     
-    //IN FUTURE, WOULD LIKE TO HAVE THESE ALPHABETICAL BY LAST NAME, BUT LEAVING IT FOR NOW
+    NSArray *allProfessors = [[CMDataManager defaultManager] professorSort];
+    /* each section becomes a key in the dictionary and the corresponding value will be the last names of the professors in that section */
+    for(Professor *professor in allProfessors)
+    {
+        NSString *nameLetter = [professor.name substringToIndex:1];
+        [[_professorNamesBySection objectForKey:[nameLetter uppercaseString]] addObject:professor];
+    }
+    
     _sections = [[_professorNamesBySection allKeys] sortedArrayUsingSelector:@selector(compare:)];
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSArray *allProfs = [[CMDataManager defaultManager] professorSort];
+    NSMutableDictionary *mutableResults = [NSMutableDictionary dictionary];
+    
+    for(Professor *professor in allProfs)
+    {
+        NSRange nameRange = [[professor.name lowercaseString] rangeOfString:[searchText lowercaseString]];
+        NSRange departmentRange = [[professor.department lowercaseString] rangeOfString:[searchText lowercaseString]];
+        
+        if(nameRange.location != NSNotFound || departmentRange.location != NSNotFound)
+        {
+            NSString *nameLetter = [professor.name substringToIndex:1];
+            if ([nameLetter intValue])
+                nameLetter = @"#";
+            
+            if (![mutableResults objectForKey:nameLetter])
+            {
+                [mutableResults setObject:[NSMutableArray array] forKey:nameLetter];
+            }
+            [[mutableResults objectForKey:nameLetter] addObject:professor];
+        }
+    }
+    _searchResultsProfessorNamesBySection = [mutableResults copy];
+    _searchResultsSections = [[mutableResults allKeys] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -55,6 +94,10 @@
     if (tableView == self.tableView)
     {
         title = [_sections objectAtIndex:section];
+    }
+    else if(tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        title = [_searchResultsSections objectAtIndex:section];
     }
     return title;
 }
@@ -67,6 +110,11 @@
     {
         count = _sections.count;
     }
+    else if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        count =  _searchResultsSections.count;
+    }
+
     
     return count;
 }
@@ -78,6 +126,10 @@
     if([tableView isEqual:self.tableView])
     {
         [profsInSection addObject:[_professorNamesBySection objectForKey:[_sections objectAtIndex:section]]];
+    }
+    else if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
+    {
+        profsInSection = [_searchResultsProfessorNamesBySection objectForKey:[_searchResultsSections objectAtIndex:section]];
     }
     return [profsInSection count];
 }
@@ -91,8 +143,10 @@
     
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] init];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        /* this label will take the place of the default cell textLabel because we need to init it with a specific frame */
         cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(tableView.rowHeight, 0, self.view.bounds.size.width - 2*tableView.rowHeight, tableView.rowHeight)];
         cellLabel.tag = CELL_LABEL;
         
@@ -100,6 +154,10 @@
     }
     
     return cell;
+}
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return _sections;
 }
 
 #pragma mark UITableViewDelegate methods
@@ -119,7 +177,20 @@
     /* which professor we are looking in */
     NSString *cellSection = [tableView.dataSource tableView:tableView titleForHeaderInSection:indexPath.section];
     /* retrieve the information for the professor whose information we want to display */
-    cellLabel.text = cellSection;
+    Professor *professor;
+    NSString *name;
+    
+    if([tableView isEqual:self.tableView])
+    {
+        professor = [[_professorNamesBySection objectForKey:cellSection] objectAtIndex:indexPath.row];
+        name = professor.name;
+    }
+    else if([tableView isEqual:self.searchDisplayController.searchResultsTableView])
+    {
+        professor = [[_searchResultsProfessorNamesBySection objectForKey:cellSection] objectAtIndex:indexPath.row];
+        name = professor.name;
+    }
+    cellLabel.text = name;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,18 +206,11 @@
 {
     if([segue.identifier isEqual:@"toProfessorDetail"])
     {
-        for(NSString *key in _professorNamesBySection)
-        {
-            if([_selectedRowTitle isEqualToString:key])
-            {
-                Professor *professor = [_professorNamesBySection objectForKey:key];
-                [segue.destinationViewController setName:professor.name];
-                [segue.destinationViewController setDepartment:professor.department];
-                [segue.destinationViewController setEmail:professor.email];
-                [segue.destinationViewController setAddress:professor.address];
-            }
-        }
-        
+        Professor *professor = [[CMDataManager defaultManager] professorNamed:_selectedRowTitle];
+        [segue.destinationViewController setName:professor.name];
+        [segue.destinationViewController setDepartment:professor.department];
+        [segue.destinationViewController setEmail:professor.email];
+        [segue.destinationViewController setAddress:professor.address];
     }
 }
 /* all orientations supported for iOS 6.0 or later */

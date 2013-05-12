@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CMProfessorTableViewController : UITableViewController 
+@interface CMProfessorTableViewController : UITableViewController <UISearchDisplayDelegate>
 
 @property (nonatomic) NSString *building;                             //The name of the building that is being searched
 @property (nonatomic) NSArray *professors;

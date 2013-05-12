@@ -208,12 +208,12 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackTranslucent" placeholder="Search all building fields" id="iNu-sD-hTA">
+                        <searchBar key="tableFooterView" contentMode="redraw" id="6Bk-AY-PwI">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="jLg-Zw-mGV" id="ad9-4w-TvG"/>
+                                <outlet property="delegate" destination="LDp-nn-cKF" id="tXD-7T-cqS"/>
                             </connections>
                         </searchBar>
                         <connections>
@@ -223,10 +223,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="lb9-Qi-Upb"/>
                     <connections>
+                        <outlet property="searchDisplayController" destination="Axm-2b-Aja" id="8oi-Aa-X80"/>
                         <segue destination="L4M-5F-FSc" kind="push" identifier="toProfessorDetail" id="ht8-Ug-dk9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sye-dv-f3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Axm-2b-Aja">
+                    <connections>
+                        <outlet property="delegate" destination="LDp-nn-cKF" id="eDx-fa-ChB"/>
+                        <outlet property="searchBar" destination="6Bk-AY-PwI" id="nyr-Lg-Ktr"/>
+                        <outlet property="searchContentsController" destination="LDp-nn-cKF" id="Rh2-xu-Svo"/>
+                        <outlet property="searchResultsDataSource" destination="LDp-nn-cKF" id="EMa-vh-wOz"/>
+                        <outlet property="searchResultsDelegate" destination="LDp-nn-cKF" id="gts-VY-caj"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="863" y="-812"/>
         </scene>
@@ -423,18 +433,6 @@
                                         <color key="textColor" red="0.087320712829999994" green="0.095978336629999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DsU-nT-nTF">
-                                        <rect key="frame" x="20" y="227" width="216" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                        <state key="normal" title="email">
-                                            <color key="titleColor" red="0.087320712829999994" green="0.095978336629999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -462,54 +460,6 @@
             <point key="canvasLocation" x="1294" y="-296"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sendFeedback"/>
-                <relationship kind="action" name="toggleZoomScale"/>
-                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
-            </relationships>
-        </class>
-        <class className="CMMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteDirections:"/>
-                <relationship kind="action" name="playAction:"/>
-                <relationship kind="action" name="stopAudio:"/>
-                <relationship kind="action" name="toggleInfo"/>
-                <relationship kind="action" name="toggleSearchBar"/>
-                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CMProfessorDetailVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="professorLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CMProfessorTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorTableViewController.h"/>
-        </class>
-        <class className="CMSelfAdjustingTextView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
-        </class>
-        <class className="CMTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
