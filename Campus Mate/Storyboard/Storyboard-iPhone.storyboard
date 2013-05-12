@@ -425,7 +425,6 @@
         <class className="CMBuildingDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="getDirections:"/>
                 <relationship kind="action" name="sendFeedback"/>
                 <relationship kind="action" name="toggleZoomScale"/>
                 <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
