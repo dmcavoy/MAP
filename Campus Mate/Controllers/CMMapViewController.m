@@ -14,6 +14,7 @@
 #import "CMReferencePoint.h"
 #import "Building.h"
 #import "BuildingButton.h"
+#import "DirectionsView.h"
 
 #define BUTTON_SIZE 75
 #define BUTTON_INSET 50

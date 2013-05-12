@@ -228,7 +228,6 @@
 		337919991729BDD3005D769C /* 5-17-9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918BE1729BDD3005D769C /* 5-17-9.jpg */; };
 		3379199A1729BDD3005D769C /* 5-17-10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918BF1729BDD3005D769C /* 5-17-10.jpg */; };
 		3379199B1729BDD3005D769C /* 5-17-11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337918C01729BDD3005D769C /* 5-17-11.jpg */; };
-		33796DEA1739785500BF8AAF /* DirectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33796DE91739785500BF8AAF /* DirectionsView.m */; };
 		33A6801F173DCB75000494BE /* building-23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33A6801E173DCB75000494BE /* building-23.mp3 */; };
 		33A68021173DCC57000494BE /* building-28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33A68020173DCC57000494BE /* building-28.mp3 */; };
 		33A68023173DCC5F000494BE /* building-32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33A68022173DCC5F000494BE /* building-32.mp3 */; };
@@ -276,6 +275,7 @@
 		33F5ECB61730BF000021F532 /* building-49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB51730BF000021F532 /* building-49.mp3 */; };
 		33F5ECB81730BF030021F532 /* building-78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB71730BF030021F532 /* building-78.mp3 */; };
 		33F5ECBA1730BF1B0021F532 /* building-9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB91730BF1B0021F532 /* building-9.mp3 */; };
+		3F0102E6173FF922002C0CED /* DirectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0102E5173FF922002C0CED /* DirectionsView.m */; };
 		3F2395DA17398658004991A4 /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395D917398658004991A4 /* Professor.m */; };
 		3F2395DE173DDE95004991A4 /* CMProfessorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395DD173DDE94004991A4 /* CMProfessorTableViewController.m */; };
 		3FFC4376173F22F600875840 /* CMProfessorDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC4375173F22F600875840 /* CMProfessorDetailVC.m */; };
@@ -631,8 +631,6 @@
 		337918BE1729BDD3005D769C /* 5-17-9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-17-9.jpg"; sourceTree = SOURCE_ROOT; };
 		337918BF1729BDD3005D769C /* 5-17-10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-17-10.jpg"; sourceTree = SOURCE_ROOT; };
 		337918C01729BDD3005D769C /* 5-17-11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-17-11.jpg"; sourceTree = SOURCE_ROOT; };
-		33796DE81739785500BF8AAF /* DirectionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsView.h; sourceTree = "<group>"; };
-		33796DE91739785500BF8AAF /* DirectionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsView.m; sourceTree = "<group>"; };
 		33A6801E173DCB75000494BE /* building-23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-23.mp3"; sourceTree = "<group>"; };
 		33A68020173DCC57000494BE /* building-28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-28.mp3"; sourceTree = "<group>"; };
 		33A68022173DCC5F000494BE /* building-32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-32.mp3"; sourceTree = "<group>"; };
@@ -681,6 +679,8 @@
 		33F5ECB51730BF000021F532 /* building-49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-49.mp3"; sourceTree = "<group>"; };
 		33F5ECB71730BF030021F532 /* building-78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-78.mp3"; sourceTree = "<group>"; };
 		33F5ECB91730BF1B0021F532 /* building-9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-9.mp3"; sourceTree = "<group>"; };
+		3F0102E4173FF922002C0CED /* DirectionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsView.h; sourceTree = "<group>"; };
+		3F0102E5173FF922002C0CED /* DirectionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsView.m; sourceTree = "<group>"; };
 		3F2395D917398658004991A4 /* Professor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Professor.m; sourceTree = "<group>"; };
 		3F2395DB173989A6004991A4 /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
 		3F2395DC173DDE94004991A4 /* CMProfessorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMProfessorTableViewController.h; sourceTree = "<group>"; };
@@ -1298,8 +1298,8 @@
 			children = (
 				5C386519158664DE00544C9B /* BuildingButton.h */,
 				5C38651A158664DE00544C9B /* BuildingButton.m */,
-				33796DE81739785500BF8AAF /* DirectionsView.h */,
-				33796DE91739785500BF8AAF /* DirectionsView.m */,
+				3F0102E4173FF922002C0CED /* DirectionsView.h */,
+				3F0102E5173FF922002C0CED /* DirectionsView.m */,
 				D49D813A15B483260007A528 /* CMSelfAdjustingTextView.h */,
 				D49D813B15B483260007A528 /* CMSelfAdjustingTextView.m */,
 				D4D5E22716AD966300C9630C /* CMMapView.h */,
@@ -1854,10 +1854,10 @@
 				D49D813C15B483270007A528 /* CMSelfAdjustingTextView.m in Sources */,
 				D4D5E22916AD966300C9630C /* CMMapView.m in Sources */,
 				33F4D696172EF81500F7A51D /* AudioAlerts.m in Sources */,
-				3330E8F31734BF7F00DE5557 /* DirectionsViewController.m in Sources */,
 				3F2395DA17398658004991A4 /* Professor.m in Sources */,
 				3F2395DE173DDE95004991A4 /* CMProfessorTableViewController.m in Sources */,
 				3FFC4376173F22F600875840 /* CMProfessorDetailVC.m in Sources */,
+				3F0102E6173FF922002C0CED /* DirectionsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
