@@ -42,6 +42,7 @@
 
 #pragma mark - UIAlertView methods
 
+// For audio
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// User pressed listen
     if (buttonIndex == 1) {
@@ -92,8 +93,18 @@
     } 
 }
 
-// Checks if building has audio
-// need to update list if new buildings get audio files
+/*Checks if building has audio
+need to update list if new buildings get audio files
+This wont be needed at the point when all buildings
+have audios
+ 
+ Param:
+ building -> the building to check if has an audio
+ 
+ Return:
+ BOOL -> if it has an audio
+ 
+ */
 -(BOOL)hasBuildingAudioFor:(Building *)building{
     switch (building.buildingID) {
         case 7:
