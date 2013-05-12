@@ -246,11 +246,11 @@
                                                     <action selector="sendFeedback" destination="ZvL-5l-X2x" eventType="touchUpInside" id="BH0-Uk-Rxm"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pb2-Se-G93">
-                                                <rect key="frame" x="1" y="5" width="215" height="43"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jtV-c2-LpP">
+                                                <rect key="frame" x="0.0" y="6" width="100" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
-                                                <state key="normal" title="Get Directions To Building">
+                                                <state key="normal" title="Directions">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -258,8 +258,20 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="74H-zn-wFB" kind="custom" identifier="giveDirections" customClass="FindOnMapSegue" id="7ln-P6-Usg"/>
+                                                    <segue destination="74H-zn-wFB" kind="push" identifier="giveDirections" id="pZv-oY-WCy"/>
                                                 </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xgh-3b-1zR">
+                                                <rect key="frame" x="117" y="7" width="100" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
+                                                <state key="normal" title="Professors">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -303,16 +315,52 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="983" y="1193"/>
+            <point key="canvasLocation" x="969" y="1179"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendFeedback"/>
+                <relationship kind="action" name="toggleZoomScale"/>
+                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
+            </relationships>
+        </class>
+        <class className="CMMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDirections:"/>
+                <relationship kind="action" name="playAction:"/>
+                <relationship kind="action" name="stopAudio:"/>
+                <relationship kind="action" name="toggleInfo"/>
+                <relationship kind="action" name="toggleSearchBar"/>
+                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="CMSelfAdjustingTextView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
+        </class>
+        <class className="CMTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="QZd-vo-wqd"/>
+        <segue reference="pZv-oY-WCy"/>
         <segue reference="Ty4-Pu-82y"/>
     </inferredMetricsTieBreakers>
 </document>
