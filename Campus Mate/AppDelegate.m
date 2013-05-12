@@ -40,30 +40,39 @@
     // create a standardUserDefaults variable
     self.standardUserDefaults = [NSUserDefaults standardUserDefaults];
     
+    // If first time opened set ask the user if they want tour mode
     if (![self.standardUserDefaults valueForKey:@"tourMode"]) {
-        [self showAlert];
+        [self showAlertTourMode];
     }
    
 }
 
--(void) showAlert {
+/*
+ Creates and shows the alerts for setting up the user default tour mode.
+ */
+
+-(void) showAlertTourMode {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Tour Mode"
-                          message: @"Do you want to run the application in Tour Mode?"
+                          initWithTitle: @"Tour Mode?"
+                          message: @" Tour Mode will give you alerts when their are audio tours available for the building you are near. It works best when you are outside. \n \n Do you want to run the application in Tour Mode? "
                           delegate: self
                           cancelButtonTitle:@"No"
                           otherButtonTitles:@"Yes",nil];
     [alert show];
 }
 
+
+/*
+  Method that responds to the tour mode alert view. Sets up the user default.
+*/
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Yes
 	if (buttonIndex == 1) {
-		NSLog(@"Yes");
         [self.standardUserDefaults setBool:YES forKey:@"tourMode"];
         [self.standardUserDefaults synchronize];
 	}
+    //No
 	else {
-		NSLog(@"No");
         [self.standardUserDefaults setBool:NO forKey:@"tourMode"];
         [self.standardUserDefaults synchronize];
 	}

@@ -157,6 +157,30 @@
 
 #pragma mark - view lifecycle
 
+/*
+ If the user is already listening to an audio we need to make sure they don't try to get directions otherwise the audios buttons will disappear and get messed up.
+ */
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    if (mvc.audioAlert.alreadyAudio && [identifier isEqualToString:@"giveDirections"]) {
+        [self alertNoDirectionsWithAudio];
+        return NO;
+    }
+    return YES;
+}
+/*
+ Alerts user that they can't get directions while already listening to an audio.
+ */
+-(void)alertNoDirectionsWithAudio{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Can't Show Directions"
+                          message: @"Directions are not allowed while listening to an audio. Please stop the audio or wait for it to finish to get directions "
+                          delegate: self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     /* perform a segue to "find" a building on the map. This wil highlight and zoom to the building's location */
@@ -174,17 +198,20 @@
         [mvc markBuilding:self.building];
         [mvc zoomToBuilding:self.building];
     }
+    
     else if ([segue.identifier isEqualToString:@"giveDirections"])
     {
-        CMMapViewController *mvc = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+        // Will only call drawRect for directions view with this
+        // view controller
+        CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
         
-        /* first, unmark all the marked buildings on the map */
+        // first, unmark all the marked buildings on the map 
         for (NSString *buildingName in mvc.markedBuildings)
         {
             [mvc unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
         }
         
-        /* then, mark this building and zoom to it on the map */
+        //then, mark this building and zoom to it on the map 
         [mvc markBuilding:self.building];
         // get current location and draw line between
         // current location and selected building
@@ -262,10 +289,5 @@
 {
     return YES;
 }
-
--(IBAction)getDirections:(id)sender{
-    NSLog(@"directions");
-}
-
 
 @end
