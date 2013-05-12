@@ -34,7 +34,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    /* sets the attributes of the email button title to look like a hyperlink */
+    NSArray *normalAttributeValues = [NSArray arrayWithObjects:[UIFont fontWithName:FONT_NAME_STANDARD size:12], [UIColor blueColor], [NSNumber numberWithInt:NSUnderlineStyleSingle], nil];
+    NSArray *highlightedAttributeValues = [NSArray arrayWithObjects:[UIFont fontWithName:FONT_NAME_STANDARD size:12], [UIColor darkGrayColor], [NSNumber numberWithInt:NSUnderlineStyleSingle], nil];
+    
+    NSArray *attributeKeys = [NSArray arrayWithObjects:NSFontAttributeName, NSForegroundColorAttributeName, NSUnderlineStyleAttributeName, nil];
 }
 
 - (void)didReceiveMemoryWarning

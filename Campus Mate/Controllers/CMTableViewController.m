@@ -399,6 +399,8 @@
             }
         }
     }
+    // should never get here but just incase
+    return nil;
 }
 
 #pragma mark - UISearchBarDelegate methods

@@ -255,7 +255,8 @@ static CMDataManager *defaultManager = nil;
     }
     NSLog(@"loaded %d professors for building: %@", [_professorsByBuilding count], pBuilding);
     
-    _professorsByBuilding = [self professorSort];
+    _professorsByBuilding = [NSMutableArray arrayWithArray:[self professorSort]];
+    
 }
 /* loads buildings first from a property list, then from the database. See .h for more detail */
 - (void)loadBuildings
