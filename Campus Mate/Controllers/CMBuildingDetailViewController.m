@@ -191,25 +191,9 @@
     
     else if ([segue.identifier isEqualToString:@"giveDirections"])
     {
-        // have to use this view controller to keep up the audio
-        // player if it is upx
-        CMMapViewController *mvc1 = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-        
         // Will only call drawRect for directions view with this
         // view controller
         CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
-        
-        
-        // THIS IS A HACK! Something seemed to be wrong with
-        // the way map kit worked and the subview of the buttons
-        // were disappearing.... this seems to fix it... bad coding
-        // if it can be fixed please do so
-        if(mvc1.audioAlert.alreadyAudio){
-            mvc.audioAlert = mvc1.audioAlert;
-            [mvc addAudioButtons];
-            mvc.audioAlert.alreadyAudio = YES;
-        }
-
         
         // first, unmark all the marked buildings on the map 
         for (NSString *buildingName in mvc.markedBuildings)
@@ -291,12 +275,5 @@
 {
     return YES;
 }
-
-/*
--(IBAction)directions:(id)sender{
-    // created to help possibly solve the directions problem use if helpful
-}
- */
-
 
 @end

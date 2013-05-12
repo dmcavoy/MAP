@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3307CB86172F419300A88B32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307CB85172F419300A88B32 /* AVFoundation.framework */; };
-		330D815F173EC982001C19FD /* building-36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 330D815E173EC982001C19FD /* building-36.mp3 */; };
 		3313B21B173AA8F9002F99B5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 3313B21A173AA8F9002F99B5 /* stop.png */; };
 		337918C11729BDD3005D769C /* 5-0-0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E61729BDD3005D769C /* 5-0-0.jpg */; };
 		337918C21729BDD3005D769C /* 5-0-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337917E71729BDD3005D769C /* 5-0-1.jpg */; };
@@ -409,7 +408,6 @@
 
 /* Begin PBXFileReference section */
 		3307CB85172F419300A88B32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		330D815E173EC982001C19FD /* building-36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-36.mp3"; sourceTree = "<group>"; };
 		3313B21A173AA8F9002F99B5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		337917E61729BDD3005D769C /* 5-0-0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-0.jpg"; sourceTree = SOURCE_ROOT; };
 		337917E71729BDD3005D769C /* 5-0-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "5-0-1.jpg"; sourceTree = SOURCE_ROOT; };
@@ -1076,7 +1074,6 @@
 		33F5EC9C1730BE8A0021F532 /* Audios */ = {
 			isa = PBXGroup;
 			children = (
-				330D815E173EC982001C19FD /* building-36.mp3 */,
 				33DA6292173446A1008BAA1E /* pause.png */,
 				3313B21A173AA8F9002F99B5 /* stop.png */,
 				33DA6294173446A6008BAA1E /* play.png */,
@@ -1816,7 +1813,6 @@
 				33A68039173DCCB2000494BE /* building-76.mp3 in Resources */,
 				33A6803B173DCCBA000494BE /* building-87.mp3 in Resources */,
 				33A6803D173DCCBF000494BE /* building-89.mp3 in Resources */,
-				330D815F173EC982001C19FD /* building-36.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

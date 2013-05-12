@@ -27,7 +27,6 @@
     NSMutableArray *_markedBuildingNames;   // list of the names of marked buildings
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
     
-    UIButton *dismissButton;  // directions dismiss button
     DirectionsView * directions; // view with directions line
     Building *usersLastBuilding; // users last building
     
@@ -469,21 +468,21 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  */
 - (void)addDismissDirectionsButton{
     
-    dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    directions.dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
+    [directions.dismissButton addTarget:self action:@selector(deleteDirections:) forControlEvents:UIControlEventTouchUpInside];
     
-    [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
-    [dismissButton setBackgroundColor:[UIColor blackColor]];
+    [directions.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [directions.dismissButton setBackgroundColor:[UIColor blackColor]];
     
-    dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+    directions.dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     
-    dismissButton.clipsToBounds = YES;
-    dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
-    dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
-    dismissButton.layer.borderWidth=2.0f;
+    directions.dismissButton.clipsToBounds = YES;
+    directions.dismissButton.layer.cornerRadius = BUTTON_SIZE/2;//half of the width
+    directions.dismissButton.layer.borderColor=[UIColor blackColor].CGColor;
+    directions.dismissButton.layer.borderWidth=2.0f;
     
-    [self.view addSubview:dismissButton];
+    [self.view addSubview:directions.dismissButton];
     
 }
 
@@ -491,11 +490,10 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  Responder to the dismissButton being pressed. Deletes the directionsView (the yellow line) and removes the dismissButton.
  */
 -(IBAction)deleteDirections:(id)sender{
+    [directions.dismissButton removeFromSuperview];
     
     [directions removeFromSuperview];
     directions = nil;
-    
-    [dismissButton removeFromSuperview];
 }
 #pragma mark - AudioAlert methods
 /*
@@ -633,12 +631,9 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
      */
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tourMode"] && !self.audioAlert.alreadyAudio) {
         Building * userBuilding = [self findClosestBuildingtoLocation:newLocation];
-        
-        NSLog(@"Users Last Building: %@",usersLastBuilding.name);
-        NSLog(@"Users Current Building: %@",userBuilding.name);
     
         // if not close enough to a building don't show anything
-        if ((usersLastBuilding != userBuilding)&& userBuilding) {
+        if (usersLastBuilding != userBuilding) {
             usersLastBuilding = userBuilding;
             if ([self.audioAlert hasBuildingAudioFor:userBuilding]) {
                 [self.audioAlert showAlertFor:userBuilding];
@@ -701,12 +696,11 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         }
     }
     
-    // FIX : Trying to keep it from presenting audios before you are actually near a building
+    // if you are too far from all the buildings then just
+    // keep it as the last building you were at
     if (sumDistance > 200) {
-        NSLog(@"TOO FAR FROM CLOSEST BUILDING");
-        return nil;
+        return usersLastBuilding;
     }
-    NSLog(@"Closest building is %@", closestBuilding.name);
     return closestBuilding;
 }
 
@@ -821,9 +815,9 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
  Update the location of the dismiss button
  */
 -(void)updateDismissButtonLocation{
-    if (dismissButton) {
+    if (directions.dismissButton) {
         // different than when created because of nav bar
-        dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET+ self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
+        directions.dismissButton.frame = CGRectMake(3*(self.view.bounds.size.width/4), (self.view.bounds.size.height - BUTTON_SIZE  - BUTTON_INSET+ self.navigationController.navigationBar.bounds.size.height), BUTTON_SIZE, BUTTON_SIZE);//width and height should be same value
     }
 }
 /*

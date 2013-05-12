@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/Controllers/CMMapViewController.m"
-         timestampString = "389985287.314314"
+         timestampString = "390010257.655204"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "616"
-         endingLineNumber = "616"
+         startingLineNumber = "615"
+         endingLineNumber = "615"
          landmarkName = "@implementation CMMapViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -47,7 +47,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/DirectionsView.m"
-         timestampString = "389908006.161034"
+         timestampString = "390010143.973305"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "28"
@@ -60,7 +60,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/DirectionsView.m"
-         timestampString = "389908006.161034"
+         timestampString = "390010143.973305"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "33"
@@ -86,7 +86,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/DirectionsView.m"
-         timestampString = "389840461.597407"
+         timestampString = "390010143.973305"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "16"
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/Controllers/CMBuildingDetailViewController.m"
-         timestampString = "389991338.908147"
+         timestampString = "390009592.154026"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "215"
-         endingLineNumber = "215"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -131,19 +131,6 @@
          startingLineNumber = "171"
          endingLineNumber = "171"
          landmarkName = "-stopAudioPlayer"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Campus Mate/Controllers/CMBuildingDetailViewController.m"
-         timestampString = "389991338.908147"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
-         landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

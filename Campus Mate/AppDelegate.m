@@ -66,13 +66,13 @@
   Method that responds to the tour mode alert view. Sets up the user default.
 */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Yes
 	if (buttonIndex == 1) {
-		NSLog(@"Yes");
         [self.standardUserDefaults setBool:YES forKey:@"tourMode"];
         [self.standardUserDefaults synchronize];
 	}
+    //No
 	else {
-		NSLog(@"No");
         [self.standardUserDefaults setBool:NO forKey:@"tourMode"];
         [self.standardUserDefaults synchronize];
 	}
