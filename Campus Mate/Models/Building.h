@@ -22,7 +22,7 @@
 @property (copy, nonatomic) NSString *description;
 @property (copy, nonatomic) NSString *address;
 @property (copy, nonatomic) NSString *hours;
-@property (nonatomic) Professor *professors;
+@property (nonatomic) NSMutableArray *professors;
 @property (nonatomic) CLLocationDegrees latitude;
 @property (nonatomic) CLLocationDegrees longitude;
 

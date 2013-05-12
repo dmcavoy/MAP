@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Building;
+@class Building, Professor;
 
 @interface CMDataManager : NSObject
 
@@ -53,5 +53,11 @@
 
 // returns the building object containing information about the building with given name
 - (Building *)buildingNamed:(NSString *)buildingName;
+
+-(NSArray *)professorSort;
+
+-(NSString *)professorsBuilding:(Professor *)professor;
+
+-(NSString *)professorNamed:(Professor *)professor;
 
 @end

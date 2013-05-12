@@ -49,7 +49,7 @@
     return [_referencePoints objectsForKeys:[_referencePoints allKeys] notFoundMarker:[NSNull null]];
 }
 
--(NSMutableArray *)professorSort
+-(NSArray *)professorSort
 {
     [_professorsByBuilding sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"buildingName" ascending:YES]]];
     return _professorsByBuilding;
@@ -58,6 +58,15 @@
 - (Building *)buildingNamed:(NSString *)buildingName
 {
     return [_buildingsByName objectForKey:buildingName];
+}
+-(NSString *)professorNamed:(Professor *)professor
+{
+    return professor.name;
+}
+-(NSString *)professorsBuilding:(Professor *)professor
+{
+    NSString *office = professor.buildingName;
+    return office;
 }
 
 static CMDataManager *defaultManager = nil;
@@ -88,6 +97,11 @@ static CMDataManager *defaultManager = nil;
         building = @"Druckenmiller";
         return building;
     }
+    else if([building rangeOfString:@"Cleaveland Hall"].location != NSNotFound)
+    {
+        building = @"Cleaveland";
+        return building;
+    }
     else if([building rangeOfString:@"Boody-Johnson"].location != NSNotFound)
     {
         building = @"Boody-Johnson";
@@ -106,11 +120,6 @@ static CMDataManager *defaultManager = nil;
     else if([building rangeOfString:@"Station"].location != NSNotFound)
     {
         building = @"Station";
-        return building;
-    }
-    else if([building rangeOfString:@"Cleaveland"].location != NSNotFound)
-    {
-        building = @"Cleaveland";
         return building;
     }
     else if([building rangeOfString:@"Dudley"].location != NSNotFound)
@@ -153,7 +162,8 @@ static CMDataManager *defaultManager = nil;
         building = @"Ashby";
         return building;
     }
-    else if([building rangeOfString:@"38 College"].location != NSNotFound)
+    //Addresses for 24, 32 and 38 College st loaded here, since all data for these addresses was grouped together 
+    else if([building rangeOfString:@"30 College"].location != NSNotFound)
     {
         building = @"College";
         return building;
@@ -183,6 +193,11 @@ static CMDataManager *defaultManager = nil;
         return building;
     }
     
+}
+//because of how app and server are set up, offices in Cleaveland must be loaded in this way
+-(NSString *)loadCleaveland
+{
+    return @"Cleaveland";
 }
 
 -(void)loadProfessorsInBuilding:(NSString *)pBuilding
@@ -250,8 +265,11 @@ static CMDataManager *defaultManager = nil;
     NSString *pListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/%@.plist", BUILDINGS_PLIST]];
     NSDictionary *pListContents = [NSDictionary dictionaryWithContentsOfFile:pListPath];
     
-        
-    if (pListContents) 
+    //will load Cleaveland Hall once
+    NSString *cleav = [self loadCleaveland];
+    [self loadProfessorsInBuilding:cleav];
+    
+    if (pListContents)
     {
         /* propety list contained building informaiton, so create and stores a new building for each building in the plist */
         for (NSString *buildingName in [pListContents allKeys]) 

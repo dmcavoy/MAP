@@ -11,6 +11,8 @@
 #import "CMMapViewController.h"
 #import "CMSelfAdjustingTextView.h"
 #import "Building.h"
+#import "Professor.h"
+#import "CMProfessorTableViewController.h"
 
 @interface CMBuildingDetailViewController ()
 {
@@ -23,6 +25,8 @@
 
 @synthesize building = _building;
 @synthesize scrollView = _scrollView;
+@synthesize professorsInBuilding = _professorsInBuilding;
+@synthesize professors = _professors;
 @synthesize buildingNameLabel = _buildingNameLabel;
 @synthesize buildingAddressLabel = _buildingAddressLabel;
 @synthesize buildingFunctionLabel = _buildingFunctionLabel;
@@ -31,11 +35,17 @@
 @synthesize hoursView = _hoursView;
 @synthesize buildingGraphic = _buildingGraphic;
 
+
 - (void)setBuilding:(Building *)building
 {
     _building = building;
     
     [self updateUI];
+}
+-(void)setProfessorsInBuilding:(NSMutableArray *)professorsInBuilding
+{
+    _professorsInBuilding = professorsInBuilding;
+    _professorsInBuilding = [[NSMutableArray alloc] initWithArray:professorsInBuilding];
 }
 
 /* simply returns the controller's root view casted as a UIScrollView, for convenience */
@@ -179,6 +189,12 @@
         // get current location and draw line between
         // current location and selected building
         [mvc zoomToBuilding:self.building];
+    }
+    else if([segue.identifier isEqualToString:@"toProfessorList"])
+    {
+        CMProfessorTableViewController *ptvc = (CMProfessorTableViewController *)segue.destinationViewController;
+        ptvc.professors = [[NSArray alloc] initWithArray:_professorsInBuilding];
+        [segue.destinationViewController initialize];
     }
 }
 

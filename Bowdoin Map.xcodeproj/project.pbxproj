@@ -259,8 +259,9 @@
 		33F5ECB61730BF000021F532 /* building-49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB51730BF000021F532 /* building-49.mp3 */; };
 		33F5ECB81730BF030021F532 /* building-78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB71730BF030021F532 /* building-78.mp3 */; };
 		33F5ECBA1730BF1B0021F532 /* building-9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB91730BF1B0021F532 /* building-9.mp3 */; };
-		3F2395D71739829F004991A4 /* CMPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395D61739829F004991A4 /* CMPickTableViewController.m */; };
 		3F2395DA17398658004991A4 /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395D917398658004991A4 /* Professor.m */; };
+		3F2395DE173DDE95004991A4 /* CMProfessorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395DD173DDE94004991A4 /* CMProfessorTableViewController.m */; };
+		3FFC4376173F22F600875840 /* CMProfessorDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC4375173F22F600875840 /* CMProfessorDetailVC.m */; };
 		5C11BC921590CA9100FBF69A /* navbar-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11BC901590CA9100FBF69A /* navbar-32.png */; };
 		5C11BC931590CA9100FBF69A /* navbar-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11BC911590CA9100FBF69A /* navbar-44.png */; };
 		5C38643E1586643000544C9B /* BuildingDetailSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3864351586643000544C9B /* BuildingDetailSegue.m */; };
@@ -646,10 +647,12 @@
 		33F5ECB51730BF000021F532 /* building-49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-49.mp3"; sourceTree = "<group>"; };
 		33F5ECB71730BF030021F532 /* building-78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-78.mp3"; sourceTree = "<group>"; };
 		33F5ECB91730BF1B0021F532 /* building-9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-9.mp3"; sourceTree = "<group>"; };
-		3F2395D51739829F004991A4 /* CMPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPickTableViewController.h; sourceTree = "<group>"; };
-		3F2395D61739829F004991A4 /* CMPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPickTableViewController.m; sourceTree = "<group>"; };
 		3F2395D917398658004991A4 /* Professor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Professor.m; sourceTree = "<group>"; };
 		3F2395DB173989A6004991A4 /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
+		3F2395DC173DDE94004991A4 /* CMProfessorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMProfessorTableViewController.h; sourceTree = "<group>"; };
+		3F2395DD173DDE94004991A4 /* CMProfessorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMProfessorTableViewController.m; sourceTree = "<group>"; };
+		3FFC4374173F22F600875840 /* CMProfessorDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMProfessorDetailVC.h; sourceTree = "<group>"; };
+		3FFC4375173F22F600875840 /* CMProfessorDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMProfessorDetailVC.m; sourceTree = "<group>"; };
 		5C11BC901590CA9100FBF69A /* navbar-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-32.png"; path = "Images/UIImages/navbar-32.png"; sourceTree = "<group>"; };
 		5C11BC911590CA9100FBF69A /* navbar-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-44.png"; path = "Images/UIImages/navbar-44.png"; sourceTree = "<group>"; };
 		5C3864341586643000544C9B /* BuildingDetailSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuildingDetailSegue.h; path = Storyboard/BuildingDetailSegue.h; sourceTree = "<group>"; };
@@ -1255,8 +1258,10 @@
 		5CA1D7CA1586515B00218377 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3F2395D51739829F004991A4 /* CMPickTableViewController.h */,
-				3F2395D61739829F004991A4 /* CMPickTableViewController.m */,
+				3FFC4374173F22F600875840 /* CMProfessorDetailVC.h */,
+				3FFC4375173F22F600875840 /* CMProfessorDetailVC.m */,
+				3F2395DC173DDE94004991A4 /* CMProfessorTableViewController.h */,
+				3F2395DD173DDE94004991A4 /* CMProfessorTableViewController.m */,
 				5C3864441586644300544C9B /* CMBuildingDetailViewController.h */,
 				5C3864451586644300544C9B /* CMBuildingDetailViewController.m */,
 				3330E8F11734BF7F00DE5557 /* DirectionsViewController.h */,
@@ -1782,8 +1787,9 @@
 				D4D5E22916AD966300C9630C /* CMMapView.m in Sources */,
 				33F4D696172EF81500F7A51D /* AudioAlerts.m in Sources */,
 				3330E8F31734BF7F00DE5557 /* DirectionsViewController.m in Sources */,
-				3F2395D71739829F004991A4 /* CMPickTableViewController.m in Sources */,
 				3F2395DA17398658004991A4 /* Professor.m in Sources */,
+				3F2395DE173DDE95004991A4 /* CMProfessorTableViewController.m in Sources */,
+				3FFC4376173F22F600875840 /* CMProfessorDetailVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
