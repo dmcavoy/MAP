@@ -84,7 +84,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="List" id="Ych-mN-ToY">
                             <connections>
-                                <segue destination="jLg-Zw-mGV" kind="custom" identifier="toList" customClass="MapToListSegue" id="MT4-n0-vZz"/>
+                                <segue destination="Aqo-As-wE0" kind="push" id="HEB-8n-1XP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -99,6 +99,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0L-eG-bCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-46" y="23"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nzP-MW-8NU">
+            <objects>
+                <viewController id="Aqo-As-wE0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UlQ-g1-XHZ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l4b-1C-LSc">
+                                <rect key="frame" x="109" y="168" width="93" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Buildings">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="jLg-Zw-mGV" kind="custom" identifier="toList" customClass="MapToListSegue" id="Hus-ar-bm3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4B2-Vw-cZ0">
+                                <rect key="frame" x="104" y="314" width="103" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Professors">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="LDp-nn-cKF" kind="push" id="6wX-Dr-YrK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2Gi-yH-4hI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I3Z-tH-row" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547" y="-128"/>
         </scene>
         <!--Table View Controller - Bowdoin Buildings-->
         <scene sceneID="pNg-mZ-5h0">
@@ -151,16 +198,24 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="571" y="-141"/>
+            <point key="canvasLocation" x="987" y="623"/>
         </scene>
         <!--Professor Table View Controller-->
         <scene sceneID="tiw-Ix-CcY">
             <objects>
                 <tableViewController id="LDp-nn-cKF" customClass="CMProfessorTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6CJ-Mr-GND">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackTranslucent" placeholder="Search all building fields" id="iNu-sD-hTA">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <connections>
+                                <outlet property="delegate" destination="jLg-Zw-mGV" id="ad9-4w-TvG"/>
+                            </connections>
+                        </searchBar>
                         <connections>
                             <outlet property="dataSource" destination="LDp-nn-cKF" id="oOX-uD-e5x"/>
                             <outlet property="delegate" destination="LDp-nn-cKF" id="1QD-Ke-jjZ"/>
@@ -173,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sye-dv-f3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-125" y="750"/>
+            <point key="canvasLocation" x="863" y="-812"/>
         </scene>
         <!--Building Detail View Controller - Building Name-->
         <scene sceneID="oOY-QV-XnB">
@@ -270,7 +325,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aJQ-ES-GyK">
-                                                <rect key="frame" x="0.0" y="9" width="100" height="45"/>
+                                                <rect key="frame" x="58" y="9" width="100" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
                                                 <state key="normal" title="Directions">
@@ -282,21 +337,6 @@
                                                 </state>
                                                 <connections>
                                                     <segue destination="KFq-eh-UH4" kind="push" identifier="giveDirections" id="ZoQ-ij-egh"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="98Q-zS-O6d">
-                                                <rect key="frame" x="117" y="10" width="100" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="13"/>
-                                                <state key="normal" title="Professors">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="LDp-nn-cKF" kind="push" identifier="toProfessorList" id="Xwm-Be-lxZ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -342,18 +382,18 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="459" y="637"/>
+            <point key="canvasLocation" x="103" y="925"/>
         </scene>
         <!--Professor DetailVC-->
         <scene sceneID="0ty-Ss-mNf">
             <objects>
                 <viewController id="L4M-5F-FSc" customClass="CMProfessorDetailVC" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vAT-ic-Hol">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="T0z-lQ-Gqd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Professor name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nxu-He-F46">
@@ -419,16 +459,64 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="254" y="1208"/>
+            <point key="canvasLocation" x="1294" y="-296"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendFeedback"/>
+                <relationship kind="action" name="toggleZoomScale"/>
+                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
+            </relationships>
+        </class>
+        <class className="CMMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDirections:"/>
+                <relationship kind="action" name="playAction:"/>
+                <relationship kind="action" name="stopAudio:"/>
+                <relationship kind="action" name="toggleInfo"/>
+                <relationship kind="action" name="toggleSearchBar"/>
+                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorDetailVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="professorLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorTableViewController.h"/>
+        </class>
+        <class className="CMSelfAdjustingTextView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
+        </class>
+        <class className="CMTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JLH-I1-Ecx"/>
+        <segue reference="IvL-M9-TUg"/>
         <segue reference="zBU-wu-z64"/>
     </inferredMetricsTieBreakers>
 </document>
