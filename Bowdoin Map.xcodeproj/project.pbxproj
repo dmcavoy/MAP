@@ -275,6 +275,7 @@
 		33F5ECB61730BF000021F532 /* building-49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB51730BF000021F532 /* building-49.mp3 */; };
 		33F5ECB81730BF030021F532 /* building-78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB71730BF030021F532 /* building-78.mp3 */; };
 		33F5ECBA1730BF1B0021F532 /* building-9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 33F5ECB91730BF1B0021F532 /* building-9.mp3 */; };
+		33F9F6F317409E6100019E6C /* Bowdoin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33F9F6F217409E6100019E6C /* Bowdoin.jpg */; };
 		3F2395DA17398658004991A4 /* Professor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395D917398658004991A4 /* Professor.m */; };
 		3F2395DE173DDE95004991A4 /* CMProfessorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2395DD173DDE94004991A4 /* CMProfessorTableViewController.m */; };
 		3FD2DA2D173FFB2B00870B91 /* DirectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD2DA2C173FFB2B00870B91 /* DirectionsView.m */; };
@@ -679,6 +680,7 @@
 		33F5ECB51730BF000021F532 /* building-49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-49.mp3"; sourceTree = "<group>"; };
 		33F5ECB71730BF030021F532 /* building-78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-78.mp3"; sourceTree = "<group>"; };
 		33F5ECB91730BF1B0021F532 /* building-9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "building-9.mp3"; sourceTree = "<group>"; };
+		33F9F6F217409E6100019E6C /* Bowdoin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bowdoin.jpg; sourceTree = "<group>"; };
 		3F2395D917398658004991A4 /* Professor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Professor.m; sourceTree = "<group>"; };
 		3F2395DB173989A6004991A4 /* Professor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Professor.h; sourceTree = "<group>"; };
 		3F2395DC173DDE94004991A4 /* CMProfessorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMProfessorTableViewController.h; sourceTree = "<group>"; };
@@ -1180,6 +1182,7 @@
 		5C887B42157E418D00FF1810 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				33F9F6F217409E6100019E6C /* Bowdoin.jpg */,
 				5C887B64157E41AD00FF1810 /* Building Graphics */,
 				5C38645A1586647300544C9B /* UI Graphics */,
 			);
@@ -1828,6 +1831,7 @@
 				33A68039173DCCB2000494BE /* building-76.mp3 in Resources */,
 				33A6803B173DCCBA000494BE /* building-87.mp3 in Resources */,
 				33A6803D173DCCBF000494BE /* building-89.mp3 in Resources */,
+				33F9F6F317409E6100019E6C /* Bowdoin.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

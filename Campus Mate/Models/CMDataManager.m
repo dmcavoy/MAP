@@ -14,7 +14,7 @@
 @interface CMDataManager()
 {
 @private
-    NSMutableDictionary *_buildingsByName; // dictionary storing all loaded buildings, using their names as keys  
+    NSMutableDictionary *_buildingsByName; // dictionary storing all loaded buildings, using their names as keys
     NSMutableDictionary *_referencePoints; // dictionary storying loaded reference points
     NSMutableArray *_professorsByBuilding;
 }
@@ -29,7 +29,7 @@
 {
     self = [super init];
     
-    if (self) 
+    if (self)
     {
         _buildingsByName = [NSMutableDictionary dictionary];
         _professorsByBuilding = [[NSMutableArray alloc] init];
@@ -64,10 +64,10 @@
     NSArray *allProfs = [[CMDataManager defaultManager] professorSort];
     for(Professor *professor in allProfs)
     {
-            if([professor.name isEqualToString:name])
-            {
-                return professor;
-            }
+        if([professor.name isEqualToString:name])
+        {
+            return professor;
+        }
     }
     return nil;
 }
@@ -84,7 +84,7 @@ static CMDataManager *defaultManager = nil;
 {
     @synchronized([CMDataManager class])
     {
-        if (!defaultManager) 
+        if (!defaultManager)
         {
             defaultManager = [[self alloc] init];
         }
@@ -165,7 +165,7 @@ static CMDataManager *defaultManager = nil;
         building = @"Ashby";
         return building;
     }
-    //Addresses for 24, 32 and 38 College st loaded here, since all data for these addresses was grouped together 
+    //Addresses for 24, 32 and 38 College st loaded here, since all data for these addresses was grouped together
     else if([building rangeOfString:@"30 College"].location != NSNotFound)
     {
         building = @"College";
@@ -205,19 +205,25 @@ static CMDataManager *defaultManager = nil;
 
 -(void)addProfData
 {
-    for (Building *building in self.buildings)
+    NSArray *allBuildings = [_buildingsByName allKeys];
+    BOOL cleavelandLoaded = false;
+    for (NSString *build in allBuildings)
     {
         BOOL needToSave;
         NSString *buildName;
-        buildName = [self modifyBuildingNameForURL:building.name];
-        if(![buildName isEqualToString:building.name])
+        buildName = [self modifyBuildingNameForURL:build];
+        if(![buildName isEqualToString:build])
         {
             needToSave = [self loadProfessorsInBuilding:buildName];
             if(needToSave)
             {
-                //only way to get professors in cleaveland to load
-                NSString *cleaveland = [self loadCleaveland];
-                needToSave = [self loadProfessorsInBuilding:cleaveland];
+                if(!cleavelandLoaded)
+                {
+                    //only way to get professors in cleaveland to load
+                    NSString *cleaveland = [self loadCleaveland];
+                    needToSave = [self loadProfessorsInBuilding:cleaveland];
+                    cleavelandLoaded = true;
+                }
                 [self saveProfessors];
             }
             else
@@ -258,7 +264,7 @@ static CMDataManager *defaultManager = nil;
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *lastSyncString = [dateFormatter stringFromDate:lastSync];
-
+    
     
     NSURL *profURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://mobileapps.bowdoin.edu/campusmate/get_building_profs.php?building=%@", pBuilding]];
     NSString *profPost = [NSString stringWithFormat:@"lastSync=%@", lastSyncString];
@@ -279,7 +285,7 @@ static CMDataManager *defaultManager = nil;
     {
         NSLog(@"failed to connect to server with error: %@", profError.localizedDescription);
     }
-
+    
     NSMutableArray *JSData = !profError ? [NSJSONSerialization JSONObjectWithData:returnProfData options:NSJSONReadingMutableContainers error:nil] : nil;
     if(JSData.count)
     {
@@ -288,7 +294,7 @@ static CMDataManager *defaultManager = nil;
             NSDictionary *information = [[NSDictionary alloc] initWithObjectsAndKeys:pBuilding, @"buildingName", profInfo[0], @"name", profInfo[1], @"address", profInfo[2], @"department", profInfo[3], @"email", nil];
             
             Professor *professor = [[Professor alloc] init];
-           
+            
             professor.buildingName = [information objectForKey:@"buildingName"];
             professor.name = [information objectForKey:@"name"];
             professor.address = [information objectForKey:@"address"];
@@ -300,9 +306,9 @@ static CMDataManager *defaultManager = nil;
         
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"last sync"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    
+        
     }
-
+    
     _professorsByBuilding = [NSMutableArray arrayWithArray:[self professorSort]];
     return true;
     
@@ -376,7 +382,7 @@ static CMDataManager *defaultManager = nil;
     if (pListContents)
     {
         /* propety list contained building informaiton, so create and stores a new building for each building in the plist */
-        for (NSString *buildingName in [pListContents allKeys]) 
+        for (NSString *buildingName in [pListContents allKeys])
         {
             NSDictionary *buildingInfo = [pListContents objectForKey:buildingName];
             
@@ -399,7 +405,7 @@ static CMDataManager *defaultManager = nil;
     NSDate *lastSync = [[NSUserDefaults standardUserDefaults] objectForKey:@"last sync"];
     
     /* need a full sync if either the app has never been syncd, and/or the plist did not exist */
-    if (!lastSync || !pListContents) 
+    if (!lastSync || !pListContents)
     {
         lastSync = [NSDate dateWithTimeIntervalSince1970:0];
     }
@@ -408,7 +414,7 @@ static CMDataManager *defaultManager = nil;
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *lastSyncString = [dateFormatter stringFromDate:lastSync];
-        
+    
     /* create the POST HTTP request */
     NSURL *baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/get_building_updates.php", HOST]];
     NSString *post = [NSString stringWithFormat:@"lastSync=%@", lastSyncString];
@@ -428,14 +434,14 @@ static CMDataManager *defaultManager = nil;
     /* perform a synchronous load because, since this method needs only be called when the app starts up, we actually WANT the main thread to block until the load is completed (otherwise the user would see an empty map)*/
     NSError *error;
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
-            
-    if (error) 
+    
+    if (error)
     {
         NSLog(@"failed to connect to server with error: %@", error.localizedDescription);
     }
     
     NSMutableArray *JSONData = !error ? [NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableContainers error:nil] : nil;
-        
+    
     if (JSONData.count)
     {
         /* server returned data, so update or create buildings accordingly */
@@ -443,14 +449,14 @@ static CMDataManager *defaultManager = nil;
         {
             NSString *buildingName = [buildingInfo objectForKey:@"name"];
             Building *building = [_buildingsByName objectForKey:buildingName];
-            if (!building) 
+            if (!building)
             {
                 /* note: building graphics are stored locally. Images are associated with buildings based on their unique ID */
                 building = [[Building alloc] initWithID:[[buildingInfo objectForKey:@"id"] intValue]];
                 
                 [_buildingsByName setObject:building forKey:buildingName];
             }
-        
+            
             building.name = [buildingInfo objectForKey:@"name"];
             building.address = [buildingInfo objectForKey:@"address"];
             building.function = [buildingInfo objectForKey:@"function"];
@@ -459,7 +465,7 @@ static CMDataManager *defaultManager = nil;
             building.hours = [buildingInfo objectForKey:@"hours"];
             building.latitude = [[buildingInfo objectForKey:@"latitude"] doubleValue];
             building.longitude = [[buildingInfo objectForKey:@"longitude"] doubleValue];
-        
+            
         }
         
         
@@ -483,10 +489,10 @@ static CMDataManager *defaultManager = nil;
     NSDictionary *pListContents = [NSDictionary dictionaryWithContentsOfFile:pListPath];
     
     /* create a new reference point object for each one stored in the plist */
-    for (NSString *referencePointName in [pListContents allKeys]) 
+    for (NSString *referencePointName in [pListContents allKeys])
     {
         NSDictionary *referencePointInfo = [pListContents objectForKey:referencePointName];
-                
+        
         double x = [[referencePointInfo objectForKey:@"x"] doubleValue];
         double y = [[referencePointInfo objectForKey:@"y"] doubleValue];
         double lat = [[referencePointInfo objectForKey:@"lat"] doubleValue];
@@ -496,7 +502,7 @@ static CMDataManager *defaultManager = nil;
         
         [_referencePoints setObject:ref forKey:referencePointName];
     }
-        
+    
     NSLog(@"loaded %d reference points", [_referencePoints count]);
 }
 
@@ -511,8 +517,8 @@ static CMDataManager *defaultManager = nil;
     NSMutableDictionary *output = [NSMutableDictionary dictionaryWithCapacity:[keys count]];
     
     /* create a new building in the plist for each building in the loaded dictionary of buildings */
-    for (NSString *buildingName in keys) 
-    {        
+    for (NSString *buildingName in keys)
+    {
         Building *building = [_buildingsByName objectForKey:buildingName];
         NSMutableDictionary *buildingDictionary = [NSMutableDictionary dictionary];
         [buildingDictionary setObject:[NSNumber numberWithInt:building.buildingID] forKey:@"id"];
@@ -532,7 +538,7 @@ static CMDataManager *defaultManager = nil;
     
     /* convert dictionary to XML format */
     id pList = [NSPropertyListSerialization dataFromPropertyList:(id)output format:NSPropertyListXMLFormat_v1_0 errorDescription:&serializeError];
-    if (serializeError) 
+    if (serializeError)
     {
         NSLog(@"failed to serialize buildings plist with error: %@", serializeError);
         return;

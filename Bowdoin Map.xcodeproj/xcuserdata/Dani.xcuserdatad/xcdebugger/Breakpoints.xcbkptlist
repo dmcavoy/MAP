@@ -4,16 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Campus Mate/Models/CMDataManager.m"
-         timestampString = "390104875.147035"
+         timestampString = "390107400.489422"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "208"
-         endingLineNumber = "208"
-         landmarkName = "-addProfData"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
+         landmarkName = "-loadProfessorsInBuilding:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -214,8 +214,8 @@
         //then, mark this building and zoom to it on the map 
         [mvc markBuilding:self.building];
         // get current location and draw line between
-        // current location and selected building
-        [mvc zoomToBuilding:self.building];
+        [mvc drawDirectionsTo:self.building];
+        
     }
 }
 

@@ -108,34 +108,45 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l4b-1C-LSc">
-                                <rect key="frame" x="109" y="168" width="93" height="44"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Bowdoin.jpg" id="lUB-Vv-3p0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Buildings">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hE5-RA-uFe">
+                                <rect key="frame" x="93" y="50" width="100" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="Professors">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jLg-Zw-mGV" kind="custom" identifier="toList" customClass="MapToListSegue" id="Hus-ar-bm3"/>
+                                    <segue destination="uOw-zK-rQ7" kind="push" id="47n-PT-jmM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4B2-Vw-cZ0">
-                                <rect key="frame" x="104" y="314" width="103" height="58"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Which list would you like?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tF0-gL-h5I">
+                                <rect key="frame" x="-2" y="0.0" width="324" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Professors">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="erf-Ce-Ibs">
+                                <rect key="frame" x="214" y="50" width="95" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="Buildings">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="uOw-zK-rQ7" kind="push" id="kK3-tY-iTh"/>
+                                    <segue destination="jLg-Zw-mGV" kind="custom" identifier="toList" customClass="MapToListSegue" id="raS-DV-uFQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -464,6 +475,57 @@
             <point key="canvasLocation" x="854" y="-750"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Bowdoin.jpg" width="1600" height="1067"/>
+    </resources>
+    <classes>
+        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendFeedback"/>
+                <relationship kind="action" name="toggleZoomScale"/>
+                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
+            </relationships>
+        </class>
+        <class className="CMMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDirections:"/>
+                <relationship kind="action" name="playAction:"/>
+                <relationship kind="action" name="stopAudio:"/>
+                <relationship kind="action" name="toggleInfo"/>
+                <relationship kind="action" name="toggleSearchBar"/>
+                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorDetailVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="professorLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorTableViewController.h"/>
+        </class>
+        <class className="CMSelfAdjustingTextView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
+        </class>
+        <class className="CMTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
