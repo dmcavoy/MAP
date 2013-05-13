@@ -48,6 +48,10 @@
 // connectivity, or attempts to run the app with none at all, the app will still remember the data retrieved from the last database sync
 - (void)saveBuildings;
 
+-(BOOL)loadProfessorsInBuilding:(NSString *)pBuilding;
+-(void)saveProfessors;
+-(void)addProfData;
+
 
 #pragma mark - accessing data
 

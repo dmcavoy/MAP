@@ -70,7 +70,6 @@
         {
             
             lastName = [lastName substringFromIndex:whiteSpaceRange.location +1];
-            NSLog(@"last name is %@", lastName);
             whiteSpaceRange = [lastName rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
         
         }

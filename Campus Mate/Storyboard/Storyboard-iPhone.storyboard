@@ -447,7 +447,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="YcQ-ly-4dM" id="AvX-Nk-nFv"/>
-                        <segue destination="L4M-5F-FSc" kind="push" id="PL0-Nd-LHy"/>
+                        <segue destination="L4M-5F-FSc" kind="push" identifier="toProfessorDetail" id="PL0-Nd-LHy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L2l-fW-wLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
