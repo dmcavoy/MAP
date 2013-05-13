@@ -712,6 +712,13 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // We need to delete the directions if you click the
+    // list button because we don't want the user calling them
+    // again. this is a bad way to do this
+    if (directions) {
+        [self deleteDirections:nil];
+    }
+    
     if ([segue.identifier isEqualToString:@"toBuildingDetail"]) 
     {
         CMBuildingDetailViewController *bdvc = (CMBuildingDetailViewController *)segue.destinationViewController;

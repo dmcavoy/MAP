@@ -404,7 +404,9 @@
                         </subviews>
                         <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Professor" id="4cy-RQ-QXL"/>
+                    <navigationItem key="navigationItem" title="Professor" id="4cy-RQ-QXL">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="iNM-JZ-fYq"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="lCu-G5-IuD" id="cGD-oV-lpj"/>
                         <outlet property="departmentLabel" destination="tah-S4-btJ" id="fvj-aa-sSB"/>
@@ -532,7 +534,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="KUV-Ff-P50"/>
+        <segue reference="ZoQ-ij-egh"/>
         <segue reference="zBU-wu-z64"/>
     </inferredMetricsTieBreakers>
 </document>
