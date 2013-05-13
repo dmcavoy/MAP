@@ -16,6 +16,7 @@
 @private
     NSMutableDictionary *_buildingsByName; // dictionary storing all loaded buildings, using their names as keys  
     NSMutableDictionary *_referencePoints; // dictionary storying loaded reference points
+    NSMutableArray *_professorsByBuilding;
 }
 @end
 
@@ -31,6 +32,7 @@
     if (self) 
     {
         _buildingsByName = [NSMutableDictionary dictionary];
+        _professorsByBuilding = [[NSMutableArray alloc] init];
         _referencePoints = [NSMutableDictionary dictionary];
     }
     return self;
@@ -47,11 +49,32 @@
     return [_referencePoints objectsForKeys:[_referencePoints allKeys] notFoundMarker:[NSNull null]];
 }
 
-
+-(NSArray *)professorSort
+{
+    [_professorsByBuilding sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"buildingName" ascending:YES]]];
+    return _professorsByBuilding;
+}
 /* return the building with given name */
 - (Building *)buildingNamed:(NSString *)buildingName
 {
     return [_buildingsByName objectForKey:buildingName];
+}
+-(Professor *)professorNamed:(NSString *)name
+{
+    NSArray *allProfs = [[CMDataManager defaultManager] professorSort];
+    for(Professor *professor in allProfs)
+    {
+            if([professor.name isEqualToString:name])
+            {
+                return professor;
+            }
+    }
+    return nil;
+}
+-(NSString *)professorsBuilding:(Professor *)professor
+{
+    NSString *office = professor.buildingName;
+    return office;
 }
 
 static CMDataManager *defaultManager = nil;
@@ -69,8 +92,272 @@ static CMDataManager *defaultManager = nil;
     }
     return nil;
 }
+//some building titles need to be modified so they can be found on the server
+-(NSString *)modifyBuildingNameForURL:(NSString *)building
+{
+    if([building rangeOfString:@"Adams"].location != NSNotFound)
+    {
+        building = @"Adams";
+        return building;
+    }
+    else if([building rangeOfString:@"Druckenmiller"].location != NSNotFound)
+    {
+        building = @"Druckenmiller";
+        return building;
+    }
+    else if([building rangeOfString:@"Boody-Johnson"].location != NSNotFound)
+    {
+        building = @"Boody-Johnson";
+        return building;
+    }
+    else if([building rangeOfString:@"Hatch"].location != NSNotFound)
+    {
+        building = @"Hatch";
+        return building;
+    }
+    else if([building rangeOfString:@"Visual"].location != NSNotFound)
+    {
+        building = @"Visual";
+        return building;
+    }
+    else if([building rangeOfString:@"Station"].location != NSNotFound)
+    {
+        building = @"Station";
+        return building;
+    }
+    else if([building rangeOfString:@"Dudley"].location != NSNotFound)
+    {
+        building = @"Dudley";
+        return building;
+    }
+    else if([building rangeOfString:@"Kanbar Hall"].location != NSNotFound)
+    {
+        building = @"Kanbar";
+        return building;
+    }
+    else if([building rangeOfString:@"Sills"].location != NSNotFound)
+    {
+        building = @"Sills";
+        return building;
+    }
+    else if([building rangeOfString:@"Searles"].location != NSNotFound)
+    {
+        building = @"Searles";
+        return building;
+    }
+    else if([building rangeOfString:@"Riley"].location != NSNotFound)
+    {
+        building = @"Riley";
+        return building;
+    }
+    else if([building rangeOfString:@"Pols"].location != NSNotFound)
+    {
+        building = @"Pols";
+        return building;
+    }
+    else if([building rangeOfString:@"Hubbard"].location != NSNotFound)
+    {
+        building = @"Hubbard";
+        return building;
+    }
+    else if([building rangeOfString:@"Ashby"].location != NSNotFound)
+    {
+        building = @"Ashby";
+        return building;
+    }
+    //Addresses for 24, 32 and 38 College st loaded here, since all data for these addresses was grouped together 
+    else if([building rangeOfString:@"30 College"].location != NSNotFound)
+    {
+        building = @"College";
+        return building;
+    }
+    else if([building rangeOfString:@"Memorial"].location != NSNotFound)
+    {
+        building = @"Memorial";
+        return building;
+    }
+    else if([building rangeOfString:@"Massachusetts"].location != NSNotFound)
+    {
+        building = @"Massachusetts";
+        return building;
+    }
+    else if([building rangeOfString:@"Gibson"].location != NSNotFound)
+    {
+        building = @"Gibson";
+        return building;
+    }
+    else if([building rangeOfString:@"Federal"].location != NSNotFound)
+    {
+        building = @"Federal";
+        return building;
+    }
+    else
+    {
+        return building;
+    }
+    
+}
+//because of how app and server are set up, offices in Cleaveland must be loaded in this way
+-(NSString *)loadCleaveland
+{
+    return @"Cleaveland";
+}
 
+-(void)addProfData
+{
+    for (Building *building in self.buildings)
+    {
+        BOOL needToSave;
+        NSString *buildName;
+        buildName = [self modifyBuildingNameForURL:building.name];
+        needToSave = [self loadProfessorsInBuilding:buildName];
+        if(needToSave)
+        {
+            //only way to get professors in cleaveland to load
+            NSString *cleaveland = [self loadCleaveland];
+            BOOL cleav = [self loadProfessorsInBuilding:cleaveland];
+            [self saveProfessors];
+        }
+    }
+}
 
+-(BOOL)loadProfessorsInBuilding:(NSString *)pBuilding
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *pListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/%@.plist", PROF_PLIST]];
+    NSDictionary *pListContents = [NSDictionary dictionaryWithContentsOfFile:pListPath];
+    
+    if(pListContents)
+    {
+        for(NSString *professorName in [pListContents allKeys])
+        {
+            NSDictionary *profInfo = [pListContents objectForKey:professorName];
+            
+            Professor *professor = [[Professor alloc] init];
+            professor.name = professorName;
+            professor.department = [profInfo objectForKey:@"department"];
+            professor.address = [profInfo objectForKey:@"address"];
+            professor.email = [profInfo objectForKey:@"email"];
+            
+            [_professorsByBuilding addObject:professor];
+        }
+        return false;
+    }
+    
+    NSDate *lastSync = [[NSUserDefaults standardUserDefaults] objectForKey:@"last sync"];
+    
+    /* format date to MySQL format */
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *lastSyncString = [dateFormatter stringFromDate:lastSync];
+
+    
+    NSURL *profURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://mobileapps.bowdoin.edu/campusmate/get_building_profs.php?building=%@", pBuilding]];
+    NSString *profPost = [NSString stringWithFormat:@"lastSync=%@", lastSyncString];
+    NSData *profData = [profPost dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];
+    NSString *profPostLength = [NSString stringWithFormat:@"%d", [profData length]];
+    
+    NSMutableURLRequest *profRequest = [[NSMutableURLRequest alloc] init];
+    profRequest.URL = profURL;
+    profRequest.HTTPMethod = @"POST";
+    profRequest.HTTPBody = profData;
+    profRequest.timeoutInterval = CONNECTION_TIMEOUT;
+    [profRequest setValue:profPostLength forHTTPHeaderField:@"Content-Length"];
+    [profRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSError *profError;
+    NSData *returnProfData = [NSURLConnection sendSynchronousRequest:profRequest returningResponse:nil error:&profError];
+    if(profError)
+    {
+        NSLog(@"failed to connect to server with error: %@", profError.localizedDescription);
+    }
+
+    NSMutableArray *JSData = !profError ? [NSJSONSerialization JSONObjectWithData:returnProfData options:NSJSONReadingMutableContainers error:nil] : nil;
+    if(JSData.count)
+    {
+        for(NSArray *profInfo in JSData)
+        {
+            NSDictionary *information = [[NSDictionary alloc] initWithObjectsAndKeys:pBuilding, @"buildingName", profInfo[0], @"name", profInfo[1], @"address", profInfo[2], @"department", profInfo[3], @"email", nil];
+            
+            Professor *professor = [[Professor alloc] init];
+           
+            professor.buildingName = [information objectForKey:@"buildingName"];
+            professor.name = [information objectForKey:@"name"];
+            professor.address = [information objectForKey:@"address"];
+            professor.department = [information objectForKey:@"department"];
+            professor.email = [information objectForKey:@"email"];
+            
+            [_professorsByBuilding addObject:professor];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"last sync"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    }
+
+    _professorsByBuilding = [NSMutableArray arrayWithArray:[self professorSort]];
+    return true;
+    
+}
+
+-(void)saveProfessors
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *pListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/%@.plist", PROF_PLIST]];
+    
+    NSMutableDictionary *profDictionary = [NSMutableDictionary dictionary];
+    NSMutableArray *keys = [NSMutableArray array];
+    NSMutableDictionary *output = [NSMutableDictionary dictionaryWithCapacity:[_professorsByBuilding count]];
+    for(int i = 0; i < [_professorsByBuilding count]; i++)
+    {
+        Professor *professor = [[Professor alloc] init];
+        professor = [_professorsByBuilding objectAtIndex:i];
+        [keys addObject:professor.name];
+    }
+    for(NSString *professorName in keys)
+    {
+        
+        Professor *professor = [[CMDataManager defaultManager] professorNamed:professorName];
+        [profDictionary setObject:professor.name forKey:@"name"];
+        if(professor.department)
+        {
+            [profDictionary setObject:professor.department forKey:@"department"];
+        }
+        if(professor.address)
+        {
+            [profDictionary setObject:professor.address forKey:@"address"];
+        }
+        if(professor.email)
+        {
+            [profDictionary setObject:professor.email forKey:@"email"];
+        }
+        if(![output objectForKey:professorName])
+        {
+            [output setObject:profDictionary forKey:professorName];
+        }
+    }
+    NSString *serializeError = nil;
+    NSError *writeError = nil;
+    
+    /* convert dictionary to XML format */
+    id pList = [NSPropertyListSerialization dataFromPropertyList:(id)output format:NSPropertyListXMLFormat_v1_0 errorDescription:&serializeError];
+    if (serializeError)
+    {
+        NSLog(@"failed to serialize buildings plist with error: %@", serializeError);
+        return;
+    }
+    
+    /* write the plist */
+    if (![pList writeToFile:pListPath options:NSDataWritingAtomic error:&writeError])
+    {
+        NSLog(@"failed to write buildings plist with error: %@", [writeError localizedDescription]);
+    }
+    else
+    {
+        NSLog(@"wrote buildings plist at path %@", pListPath);
+    }
+}
 /* loads buildings first from a property list, then from the database. See .h for more detail */
 - (void)loadBuildings
 {
@@ -78,8 +365,8 @@ static CMDataManager *defaultManager = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *pListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/%@.plist", BUILDINGS_PLIST]];
     NSDictionary *pListContents = [NSDictionary dictionaryWithContentsOfFile:pListPath];
-        
-    if (pListContents) 
+    
+    if (pListContents)
     {
         /* propety list contained building informaiton, so create and stores a new building for each building in the plist */
         for (NSString *buildingName in [pListContents allKeys]) 
@@ -121,6 +408,8 @@ static CMDataManager *defaultManager = nil;
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
+    /* need to link to professor server too*/
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = baseURL;
     request.HTTPMethod = @"POST";
@@ -139,11 +428,11 @@ static CMDataManager *defaultManager = nil;
     }
     
     NSMutableArray *JSONData = !error ? [NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableContainers error:nil] : nil;
-    
+        
     if (JSONData.count)
     {
         /* server returned data, so update or create buildings accordingly */
-        for (NSDictionary *buildingInfo in JSONData) 
+        for (NSDictionary *buildingInfo in JSONData)
         {
             NSString *buildingName = [buildingInfo objectForKey:@"name"];
             Building *building = [_buildingsByName objectForKey:buildingName];
@@ -154,7 +443,7 @@ static CMDataManager *defaultManager = nil;
                 
                 [_buildingsByName setObject:building forKey:buildingName];
             }
-            
+        
             building.name = [buildingInfo objectForKey:@"name"];
             building.address = [buildingInfo objectForKey:@"address"];
             building.function = [buildingInfo objectForKey:@"function"];
@@ -163,7 +452,10 @@ static CMDataManager *defaultManager = nil;
             building.hours = [buildingInfo objectForKey:@"hours"];
             building.latitude = [[buildingInfo objectForKey:@"latitude"] doubleValue];
             building.longitude = [[buildingInfo objectForKey:@"longitude"] doubleValue];
+        
         }
+        
+        
         
         /* save a local copy of all building information */
         [self saveBuildings];

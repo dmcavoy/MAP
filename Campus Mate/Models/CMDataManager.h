@@ -10,13 +10,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class Building;
+@class Building, Professor;
 
 @interface CMDataManager : NSObject
 
 @property (copy, nonatomic, readonly) NSArray *buildings;       // the buildings stored in the data manager
 @property (copy, nonatomic, readonly) NSArray *referencePoints; // the reference points stored in the data manager
-
+@property (copy, nonatomic, readonly) NSArray *professors;
 + (CMDataManager *)defaultManager;  // returns the static default manager
 
 #pragma mark - loading data                         
@@ -48,10 +48,20 @@
 // connectivity, or attempts to run the app with none at all, the app will still remember the data retrieved from the last database sync
 - (void)saveBuildings;
 
+-(BOOL)loadProfessorsInBuilding:(NSString *)pBuilding;
+-(void)saveProfessors;
+-(void)addProfData;
+
 
 #pragma mark - accessing data
 
 // returns the building object containing information about the building with given name
 - (Building *)buildingNamed:(NSString *)buildingName;
+
+-(NSArray *)professorSort;
+
+-(NSString *)professorsBuilding:(Professor *)professor;
+
+-(Professor *)professorNamed:(NSString *)professor;
 
 @end

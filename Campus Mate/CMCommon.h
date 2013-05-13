@@ -26,6 +26,7 @@ typedef NSInteger BuildMode;
 #define HOST @"www.bowdoin.edu/apps/campus"
 #define CONNECTION_TIMEOUT 8
 #define BUILDINGS_PLIST @"Buildings"
+#define PROF_PLIST @"Professors"
 #define REFERENCE_POINTS_PLIST @"ReferencePoints"
 #define PIN_IMAGE_NORMAL @"pinPurple.png"
 #define PIN_IMAGE_HIGHLIGHTED @"pinOrange.png"

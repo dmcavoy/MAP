@@ -23,7 +23,8 @@
          [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:svc.navigationController.view cache:NO];
      }];
     
-    [svc.navigationController popViewControllerAnimated:NO];
+    [svc.navigationController popToRootViewControllerAnimated:YES];
+    //[svc.navigationController popViewControllerAnimated:NO];
 }
 
 @end

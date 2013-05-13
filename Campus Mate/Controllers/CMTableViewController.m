@@ -19,9 +19,10 @@
     NSArray *_sections;                                 // sections in the table view
     NSDictionary *_searchResultsBuildingNamesBySection; // buildings in the search results table view using their sections as keys
     NSArray *_searchResultsSections;                    // sections in the search results table view
-    NSString *_selectedRowTitle;                        // name of the selected building 
+    NSString *_selectedRowTitle;                        // name of the selected building
 }
 - (void)initialize; // do start up initialization like creating the sections
+
 @end
 
 @implementation CMTableViewController
@@ -77,15 +78,13 @@
     
     _sections = [[_buildingNamesBySection allKeys] sortedArrayUsingSelector:@selector(compare:)];
 }
-
 #pragma mark - UISearchBarDelegate methods
 
 /* when text changes in the search bar, we want to update the shown search results immediately (like google) */
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{        
+{
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
     NSMutableDictionary *mutableResults = [NSMutableDictionary dictionary];
-    
     /* search all text fields in each building for the search text */
     for (Building *building in allBuildings) 
     {
@@ -105,10 +104,10 @@
                 [mutableResults setObject:[NSMutableArray array] forKey:nameLetter];
             }
             [[mutableResults objectForKey:nameLetter] addObject:building.name];
+
         }
-    }    
-    
-    /* set search results information */
+    }
+        /* set search results information */
     _searchResultsBuildingNamesBySection = [mutableResults copy];
     _searchResultsSections = [[mutableResults allKeys] sortedArrayUsingSelector:@selector(compare:)];
 }
@@ -268,7 +267,6 @@
     if ([segue.identifier isEqualToString:@"toBuildingDetail"]) 
     {        
         Building *building = [[CMDataManager defaultManager] buildingNamed:_selectedRowTitle];
-        
         CMBuildingDetailViewController *bdvc = (CMBuildingDetailViewController *)segue.destinationViewController;
         bdvc.building = building;
     }
