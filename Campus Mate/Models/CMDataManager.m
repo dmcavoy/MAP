@@ -210,13 +210,20 @@ static CMDataManager *defaultManager = nil;
         BOOL needToSave;
         NSString *buildName;
         buildName = [self modifyBuildingNameForURL:building.name];
-        needToSave = [self loadProfessorsInBuilding:buildName];
-        if(needToSave)
+        if(![buildName isEqualToString:building.name])
         {
-            //only way to get professors in cleaveland to load
-            NSString *cleaveland = [self loadCleaveland];
-            BOOL cleav = [self loadProfessorsInBuilding:cleaveland];
-            [self saveProfessors];
+            needToSave = [self loadProfessorsInBuilding:buildName];
+            if(needToSave)
+            {
+                //only way to get professors in cleaveland to load
+                NSString *cleaveland = [self loadCleaveland];
+                needToSave = [self loadProfessorsInBuilding:cleaveland];
+                [self saveProfessors];
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }
