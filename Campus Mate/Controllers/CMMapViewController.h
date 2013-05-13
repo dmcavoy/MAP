@@ -42,5 +42,9 @@
 - (IBAction)toggleInfo;                             // toggle the view displaying credits, etc.
 -(void)drawDirectionsTo:(Building*)destination;
     // draws a line between destiantion building and user location
+
+-(Building*)getUsersLastBuilding;
+
+-(void)setUsersLastBuilding:(Building *)building;
     
 @end

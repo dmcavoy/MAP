@@ -205,6 +205,12 @@
         // view controller
         CMMapViewController *mvc = (CMMapViewController *)segue.destinationViewController;
         
+        // the view controller we would rather use
+        CMMapViewController *mvc1 = (CMMapViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+        
+        // hack to pull through users last building
+        [mvc setUsersLastBuilding:[mvc1 getUsersLastBuilding]];
+        
         // first, unmark all the marked buildings on the map 
         for (NSString *buildingName in mvc.markedBuildings)
         {

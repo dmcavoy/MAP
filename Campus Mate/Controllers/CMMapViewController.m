@@ -627,6 +627,14 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
 
 #pragma mark - CLLocationManagerDelegate methods
 
+-(void)setUsersLastBuilding:(Building *)building{
+    usersLastBuilding = building;
+}
+
+-(Building *)getUsersLastBuilding{
+    return usersLastBuilding;
+}
+
 /* update the locaion of the green pin indication the user's location */
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 
