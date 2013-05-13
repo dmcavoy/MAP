@@ -100,7 +100,7 @@
             </objects>
             <point key="canvasLocation" x="-46" y="23"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - Search-->
         <scene sceneID="nzP-MW-8NU">
             <objects>
                 <viewController id="Aqo-As-wE0" sceneMemberID="viewController">
@@ -135,17 +135,17 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="LDp-nn-cKF" kind="push" id="6wX-Dr-YrK"/>
+                                    <segue destination="uOw-zK-rQ7" kind="push" id="kK3-tY-iTh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2Gi-yH-4hI"/>
+                    <navigationItem key="navigationItem" title="Search" id="2Gi-yH-4hI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I3Z-tH-row" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="547" y="-128"/>
+            <point key="canvasLocation" x="203" y="-804"/>
         </scene>
         <!--Table View Controller - Bowdoin Buildings-->
         <scene sceneID="pNg-mZ-5h0">
@@ -199,46 +199,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="987" y="623"/>
-        </scene>
-        <!--Professor Table View Controller-->
-        <scene sceneID="tiw-Ix-CcY">
-            <objects>
-                <tableViewController id="LDp-nn-cKF" customClass="CMProfessorTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6CJ-Mr-GND">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableFooterView" contentMode="redraw" id="6Bk-AY-PwI">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="LDp-nn-cKF" id="tXD-7T-cqS"/>
-                            </connections>
-                        </searchBar>
-                        <connections>
-                            <outlet property="dataSource" destination="LDp-nn-cKF" id="oOX-uD-e5x"/>
-                            <outlet property="delegate" destination="LDp-nn-cKF" id="1QD-Ke-jjZ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="lb9-Qi-Upb"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="Axm-2b-Aja" id="8oi-Aa-X80"/>
-                        <segue destination="L4M-5F-FSc" kind="push" identifier="toProfessorDetail" id="ht8-Ug-dk9"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sye-dv-f3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="Axm-2b-Aja">
-                    <connections>
-                        <outlet property="delegate" destination="LDp-nn-cKF" id="eDx-fa-ChB"/>
-                        <outlet property="searchBar" destination="6Bk-AY-PwI" id="nyr-Lg-Ktr"/>
-                        <outlet property="searchContentsController" destination="LDp-nn-cKF" id="Rh2-xu-Svo"/>
-                        <outlet property="searchResultsDataSource" destination="LDp-nn-cKF" id="EMa-vh-wOz"/>
-                        <outlet property="searchResultsDelegate" destination="LDp-nn-cKF" id="gts-VY-caj"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="863" y="-812"/>
         </scene>
         <!--Building Detail View Controller - Building Name-->
         <scene sceneID="oOY-QV-XnB">
@@ -394,60 +354,51 @@
             </objects>
             <point key="canvasLocation" x="103" y="925"/>
         </scene>
-        <!--Professor DetailVC-->
+        <!--Professor DetailVC - Professor-->
         <scene sceneID="0ty-Ss-mNf">
             <objects>
                 <viewController id="L4M-5F-FSc" customClass="CMProfessorDetailVC" sceneMemberID="viewController">
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vAT-ic-Hol">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                    <view key="view" contentMode="scaleToFill" id="fHq-Dq-KQD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="T0z-lQ-Gqd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Professor name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nxu-He-F46">
-                                        <rect key="frame" x="20" y="20" width="280" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RzB-ba-bc6">
-                                        <rect key="frame" x="20" y="70" width="280" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u68-cQ-btE">
-                                        <rect key="frame" x="20" y="120" width="280" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="e-mail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YLa-Yj-r2g">
-                                        <rect key="frame" x="20" y="170" width="280" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
-                                        <color key="textColor" red="0.087320712829999994" green="0.095978336629999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Professor Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9qh-Ch-C0K">
+                                <rect key="frame" x="20" y="20" width="262" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tah-S4-btJ">
+                                <rect key="frame" x="20" y="90" width="262" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lCu-G5-IuD">
+                                <rect key="frame" x="20" y="160" width="262" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NuC-ue-DuA">
+                                <rect key="frame" x="20" y="230" width="262" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <color key="textColor" red="0.087320712829999994" green="0.095978336629999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="buZ-Um-FI6" appends="YES" id="eyb-nN-TJl"/>
-                        </connections>
-                    </scrollView>
-                    <navigationItem key="navigationItem" id="4cy-RQ-QXL"/>
+                        <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Professor" id="4cy-RQ-QXL"/>
                     <connections>
-                        <outlet property="addressLabel" destination="u68-cQ-btE" id="Ltr-kU-bEI"/>
-                        <outlet property="departmentLabel" destination="RzB-ba-bc6" id="LVV-Ax-kxD"/>
-                        <outlet property="emailLabel" destination="YLa-Yj-r2g" id="W6r-r1-zlx"/>
-                        <outlet property="professorLabel" destination="nxu-He-F46" id="d11-Tx-Le6"/>
+                        <outlet property="addressLabel" destination="lCu-G5-IuD" id="cGD-oV-lpj"/>
+                        <outlet property="departmentLabel" destination="tah-S4-btJ" id="fvj-aa-sSB"/>
+                        <outlet property="emailLabel" destination="NuC-ue-DuA" id="HLB-pt-qWm"/>
+                        <outlet property="professorLabel" destination="9qh-Ch-C0K" id="JLP-il-l8p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zcc-4h-0lN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -459,14 +410,113 @@
             </objects>
             <point key="canvasLocation" x="1294" y="-296"/>
         </scene>
+        <!--Professor Table View Controller - Bowdoin Professors-->
+        <scene sceneID="4d6-0W-R0w">
+            <objects>
+                <tableViewController id="uOw-zK-rQ7" customClass="CMProfessorTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CMZ-8j-Xga">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackTranslucent" placeholder="Search all building fields" id="YIk-1l-A5M">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <connections>
+                                <outlet property="delegate" destination="uOw-zK-rQ7" id="nOe-nw-bOA"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="uOw-zK-rQ7" id="zTf-rE-taN"/>
+                            <outlet property="delegate" destination="uOw-zK-rQ7" id="LSz-hd-xox"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Bowdoin Professors" id="vDj-MY-T1I">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="gvE-T7-zdz">
+                            <connections>
+                                <segue destination="KFq-eh-UH4" kind="custom" identifier="toMap" customClass="ListToMapSegue" id="KUV-Ff-P50"/>
+                            </connections>
+                        </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="hidesBackButton" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="YcQ-ly-4dM" id="AvX-Nk-nFv"/>
+                        <segue destination="L4M-5F-FSc" kind="push" id="PL0-Nd-LHy"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L2l-fW-wLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="q9U-zd-KS4">
+                    <connections>
+                        <outlet property="delegate" destination="uOw-zK-rQ7" id="vCw-DF-htz"/>
+                        <outlet property="searchBar" destination="YIk-1l-A5M" id="NmH-KX-jIQ"/>
+                        <outlet property="searchContentsController" destination="uOw-zK-rQ7" id="4AZ-zx-IeW"/>
+                        <outlet property="searchResultsDataSource" destination="uOw-zK-rQ7" id="paR-yM-j7g"/>
+                        <outlet property="searchResultsDelegate" destination="uOw-zK-rQ7" id="fbX-df-L5n"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="854" y="-750"/>
+        </scene>
     </scenes>
+    <classes>
+        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendFeedback"/>
+                <relationship kind="action" name="toggleZoomScale"/>
+                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
+                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
+            </relationships>
+        </class>
+        <class className="CMMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="playAction:"/>
+                <relationship kind="action" name="toggleInfo"/>
+                <relationship kind="action" name="toggleSearchBar"/>
+                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorDetailVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="professorLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CMProfessorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorTableViewController.h"/>
+        </class>
+        <class className="CMSelfAdjustingTextView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
+        </class>
+        <class className="CMTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IvL-M9-TUg"/>
+        <segue reference="KUV-Ff-P50"/>
         <segue reference="zBU-wu-z64"/>
     </inferredMetricsTieBreakers>
 </document>

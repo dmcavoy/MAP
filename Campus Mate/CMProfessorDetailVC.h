@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface CMProfessorDetailVC : UIViewController <UIScrollViewDelegate>
+@interface CMProfessorDetailVC : UIViewController 
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *department;

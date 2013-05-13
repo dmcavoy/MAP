@@ -25,6 +25,7 @@
     /* fill the data mananger with data */
     [[CMDataManager defaultManager] loadReferencePoints];
     [[CMDataManager defaultManager] loadBuildings];
+
     
     /* customize UINavigationBar appearance */
     UIImage *navBarImage44 = [[UIImage imageNamed:@"navbar-44"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];

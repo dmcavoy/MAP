@@ -10,6 +10,9 @@
 
 @interface CMProfessorTableViewController : UITableViewController <UISearchDisplayDelegate>
 
-@property (nonatomic) NSString *building;                             //The name of the building that is being searched
+                            //The name of the building that is being searched
 @property (nonatomic) NSArray *professors;
+
+
+
 @end

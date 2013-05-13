@@ -25,24 +25,34 @@
 
 @implementation CMProfessorTableViewController
 
-@synthesize building;
 @synthesize professors;
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)init
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        [self initialize];
+        
     }
     return self;
 }
 
+/* called when initializing from  storyboard. currently duplicates init */
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self)
+    {
+        [self initialize];
+    }
+    return self;
+}
 -(void)initialize
 {
     /* each section is the group of buildings whose name begins with that letter of the alphabet */
     NSString *alphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     _professorNamesBySection = [NSMutableDictionary dictionaryWithCapacity:[alphabet length]];
-    _sections = [NSArray array];
     
     for(int i = 0; i < [alphabet length]; i++)
     {
@@ -53,9 +63,21 @@
     /* each section becomes a key in the dictionary and the corresponding value will be the last names of the professors in that section */
     for(Professor *professor in allProfessors)
     {
-        NSString *nameLetter = [professor.name substringToIndex:1];
+        NSString *lastName = professor.name;
+        NSRange whiteSpaceRange = [lastName rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        while(whiteSpaceRange.location != NSNotFound)
+        {
+            
+            lastName = [lastName substringFromIndex:whiteSpaceRange.location +1];
+            NSLog(@"last name is %@", lastName);
+            whiteSpaceRange = [lastName rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        }
+        NSString *nameLetter = [lastName substringToIndex:1];
         [[_professorNamesBySection objectForKey:[nameLetter uppercaseString]] addObject:professor];
     }
+    
     
     _sections = [[_professorNamesBySection allKeys] sortedArrayUsingSelector:@selector(compare:)];
 }
@@ -121,11 +143,11 @@
 //helps to display cells
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSMutableArray *profsInSection = [[NSMutableArray alloc] init];
+    NSArray *profsInSection;
     
     if([tableView isEqual:self.tableView])
     {
-        [profsInSection addObject:[_professorNamesBySection objectForKey:[_sections objectAtIndex:section]]];
+        profsInSection = [_professorNamesBySection objectForKey:[_sections objectAtIndex:section]];
     }
     else if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
     {
@@ -134,12 +156,17 @@
     return [profsInSection count];
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return _sections;
+}
+
 #define CELL_LABEL 1
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UILabel *cellLabel;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil)
     {
@@ -155,10 +182,7 @@
     
     return cell;
 }
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    return _sections;
-}
+
 
 #pragma mark UITableViewDelegate methods
 
@@ -224,6 +248,5 @@
 {
     return YES;
 }
-
 
 @end

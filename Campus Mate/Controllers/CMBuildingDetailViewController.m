@@ -217,12 +217,6 @@
         // current location and selected building
         [mvc zoomToBuilding:self.building];
     }
-    else if([segue.identifier isEqualToString:@"toProfessorList"])
-    {
-        CMProfessorTableViewController *ptvc = (CMProfessorTableViewController *)segue.destinationViewController;
-        ptvc.professors = [[NSArray alloc] initWithArray:_professorsInBuilding];
-        [segue.destinationViewController initialize];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
