@@ -17,6 +17,9 @@
 
 @property (weak, nonatomic) Building *building;
 @property (nonatomic, readonly) UIScrollView *scrollView; // this is in fact the root view of the controller
+@property  (nonatomic) NSMutableArray *professorsInBuilding;  //list of the professors with offices in current building
+@property (nonatomic) NSDictionary *professors;
+
 @property (weak, nonatomic) IBOutlet UILabel *buildingNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buildingAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buildingFunctionLabel;

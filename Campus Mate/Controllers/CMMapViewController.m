@@ -14,6 +14,7 @@
 #import "CMReferencePoint.h"
 #import "Building.h"
 #import "BuildingButton.h"
+#import "DirectionsView.h"
 
 #define BUTTON_SIZE 75
 #define BUTTON_INSET 50
@@ -26,6 +27,7 @@
     BuildingButton *_lastSelectedButton;    // the last pin button the user tapped
     NSMutableArray *_markedBuildingNames;   // list of the names of marked buildings
     CLLocationManager *_locationManager;    // used to pinpoint user's location on the map
+    NSMutableArray *_professorList;
     
     DirectionsView * directions; // view with directions line
     Building *usersLastBuilding; // users last building
@@ -86,7 +88,6 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     _locationManager.distanceFilter = 20;
     _locationManager.delegate = self;
 }
-
 /* getter for the map */
 - (CMMapView *)map
 {
@@ -588,11 +589,13 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
         [self unmarkBuilding:[[CMDataManager defaultManager] buildingNamed:buildingName]];
     }
     
+    
     /* get all loaded buildings from the data manager */
     NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
     NSMutableArray *searchResults = [NSMutableArray array];
-        
+    
     /* search through all buildings, checking name description and departments, to determine which ones match the search */
+     
     for (Building *building in allBuildings) 
     {
         NSRange nameRange = [[building.name lowercaseString] rangeOfString:[searchText lowercaseString]];
@@ -611,6 +614,7 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     /* zoom to display all search results */
     [self zoomToShowBuildings:searchResults];
 }
+
 
 #pragma mark - UIScrollViewDelegate methods
 
