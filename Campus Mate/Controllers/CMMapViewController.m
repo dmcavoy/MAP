@@ -429,8 +429,8 @@ static const CGSize SearchBarSize = {295.0f, 44.0f};
     maxY = fmaxf(destination.y, userLocation.y);
     
     /* how much "padding" to add to the box in the x and y directions */
-    CGFloat offsetX = self.view.frame.size.width / 16.0f;
-    CGFloat offsetY = (self.view.frame.size.height / 16.0f) + self.navigationController.navigationBar.frame.size.height;
+    CGFloat offsetX = self.view.frame.size.width / 3.0f;
+    CGFloat offsetY = (self.view.frame.size.height / 3.0f) + self.navigationController.navigationBar.frame.size.height;
     
     /* create the bounding box */
     CGRect boundingBox = CGRectMake(fmaxf(0.0f, minX - offsetX), fmaxf(0.0f, minY - offsetY), fminf(self.scrollView.contentSize.width / self.scrollView.zoomScale, maxX - minX + 2*offsetX), fminf(self.scrollView.contentSize.height / self.scrollView.zoomScale, maxY - minY + 2*offsetY));

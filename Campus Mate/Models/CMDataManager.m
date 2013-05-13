@@ -205,32 +205,46 @@ static CMDataManager *defaultManager = nil;
 
 -(void)addProfData
 {
-    NSArray *allBuildings = [_buildingsByName allKeys];
-    BOOL cleavelandLoaded = false;
-    for (NSString *build in allBuildings)
+    NSArray *builds = [_buildingsByName allKeys];
+    BOOL didCleaveland = false;
+    BOOL needToSave;
+    NSMutableArray *previous = [NSMutableArray array];
+    
+    //only way to get professors in cleaveland to load
+    NSString *cleaveland = [self loadCleaveland];
+    needToSave = [self loadProfessorsInBuilding:cleaveland];
+    didCleaveland = true;
+    [previous addObject:cleaveland];
+    
+    if(needToSave)
     {
-        BOOL needToSave;
-        NSString *buildName;
-        buildName = [self modifyBuildingNameForURL:build];
-        if(![buildName isEqualToString:build])
+        for (NSString *bNames in builds)
         {
-            needToSave = [self loadProfessorsInBuilding:buildName];
-            if(needToSave)
+            NSString *buildName;
+            buildName = [self modifyBuildingNameForURL:bNames];
+            if(![buildName isEqualToString:bNames])
             {
-                if(!cleavelandLoaded)
+                BOOL continueExec = true;
+                if([previous count] != 0)
                 {
-                    //only way to get professors in cleaveland to load
-                    NSString *cleaveland = [self loadCleaveland];
-                    needToSave = [self loadProfessorsInBuilding:cleaveland];
-                    cleavelandLoaded = true;
+                    for(int i = 0; i < [previous count]; i++)
+                    {
+                        if([buildName isEqualToString:[previous objectAtIndex:i]])
+                        {
+                            continueExec = false;
+                            [previous addObject:buildName];
+                        }
+                        
+                    }
+                    if(continueExec)
+                    {
+                        needToSave = [self loadProfessorsInBuilding:buildName];
+                        [previous addObject:buildName];
+                    }
                 }
-                [self saveProfessors];
-            }
-            else
-            {
-                break;
             }
         }
+        [self saveProfessors];
     }
 }
 
@@ -319,7 +333,6 @@ static CMDataManager *defaultManager = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *pListPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/%@.plist", PROF_PLIST]];
     
-    NSMutableDictionary *profDictionary = [NSMutableDictionary dictionary];
     NSMutableArray *keys = [NSMutableArray array];
     NSMutableDictionary *output = [NSMutableDictionary dictionaryWithCapacity:[_professorsByBuilding count]];
     for(int i = 0; i < [_professorsByBuilding count]; i++)
@@ -332,6 +345,8 @@ static CMDataManager *defaultManager = nil;
     {
         
         Professor *professor = [[CMDataManager defaultManager] professorNamed:professorName];
+        NSMutableDictionary *profDictionary = [NSMutableDictionary dictionary];
+        
         [profDictionary setObject:professor.name forKey:@"name"];
         if(professor.department)
         {
@@ -556,3 +571,4 @@ static CMDataManager *defaultManager = nil;
 }
 
 @end
+
