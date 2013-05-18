@@ -406,6 +406,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Professor" id="4cy-RQ-QXL">
                         <barButtonItem key="backBarButtonItem" title="Back" id="iNM-JZ-fYq"/>
+                        <barButtonItem key="rightBarButtonItem" title="Find On Map" id="2ad-10-sb0">
+                            <connections>
+                                <segue destination="KFq-eh-UH4" kind="custom" identifier="findOnMap" customClass="FindOnMapSegue" id="CG6-3K-Acj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="lCu-G5-IuD" id="cGD-oV-lpj"/>
@@ -479,54 +484,6 @@
     <resources>
         <image name="Bowdoin.jpg" width="1600" height="1067"/>
     </resources>
-    <classes>
-        <class className="CMBuildingDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMBuildingDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sendFeedback"/>
-                <relationship kind="action" name="toggleZoomScale"/>
-                <relationship kind="outlet" name="_feedbackButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="_feedbackView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="buildingAddressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingFunctionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="buildingGraphic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="buildingNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="hoursView" candidateClass="CMSelfAdjustingTextView"/>
-                <relationship kind="outlet" name="resourcesView" candidateClass="CMSelfAdjustingTextView"/>
-            </relationships>
-        </class>
-        <class className="CMMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteDirections:"/>
-                <relationship kind="action" name="playAction:"/>
-                <relationship kind="action" name="stopAudio:"/>
-                <relationship kind="action" name="toggleInfo"/>
-                <relationship kind="action" name="toggleSearchBar"/>
-                <relationship kind="outlet" name="_infoView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CMProfessorDetailVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorDetailVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="professorLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CMProfessorTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMProfessorTableViewController.h"/>
-        </class>
-        <class className="CMSelfAdjustingTextView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMSelfAdjustingTextView.h"/>
-        </class>
-        <class className="CMTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CMTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -534,6 +491,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="zBU-wu-z64"/>
-        <segue reference="KUV-Ff-P50"/>
+        <segue reference="CG6-3K-Acj"/>
     </inferredMetricsTieBreakers>
 </document>

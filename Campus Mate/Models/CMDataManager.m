@@ -266,6 +266,7 @@ static CMDataManager *defaultManager = nil;
             professor.department = [profInfo objectForKey:@"department"];
             professor.address = [profInfo objectForKey:@"address"];
             professor.email = [profInfo objectForKey:@"email"];
+            professor.buildingName = [self modifyBuildingNameForURL:professor.address];
             
             [_professorsByBuilding addObject:professor];
         }
@@ -314,6 +315,7 @@ static CMDataManager *defaultManager = nil;
             professor.address = [information objectForKey:@"address"];
             professor.department = [information objectForKey:@"department"];
             professor.email = [information objectForKey:@"email"];
+            professor.buildingName = pBuilding;
             
             [_professorsByBuilding addObject:professor];
         }

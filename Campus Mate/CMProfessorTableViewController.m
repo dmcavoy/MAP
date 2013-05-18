@@ -234,6 +234,7 @@
         [segue.destinationViewController setDepartment:professor.department];
         [segue.destinationViewController setEmail:professor.email];
         [segue.destinationViewController setAddress:professor.address];
+        [segue.destinationViewController setBuilding:professor.buildingName];
     }
 }
 /* all orientations supported for iOS 6.0 or later */

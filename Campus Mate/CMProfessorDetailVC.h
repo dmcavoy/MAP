@@ -16,11 +16,13 @@
 @property (nonatomic) NSString *department;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *email;
+@property (nonatomic) NSString *building;
 
 -(void)setDepartment:(NSString *)department;
 -(void)setName:(NSString *)name;
 -(void)setEmail:(NSString *)email;
 -(void)setAddress:(NSString *)address;
+-(void)setBuilding:(NSString *)building;
 @property (weak, nonatomic) IBOutlet UILabel *professorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;

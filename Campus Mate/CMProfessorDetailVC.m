@@ -7,6 +7,8 @@
 //
 
 #import "CMProfessorDetailVC.h"
+#import "CMDataManager.h"
+#import "Building.h"
 
 @interface CMProfessorDetailVC ()
 
@@ -18,6 +20,7 @@
 @synthesize department = _department;
 @synthesize address = _address;
 @synthesize email = _email;
+@synthesize building = _building;
 @synthesize professorLabel = _professorLabel;
 @synthesize emailLabel = _emailLabel;
 @synthesize departmentLabel = _departmentLabel;
@@ -52,6 +55,18 @@
 -(void)setDepartment:(NSString *)department
 {
     _department = department;
+}
+-(void)setBuilding:(NSString *)building
+{
+    NSArray *allBuildings = [[CMDataManager defaultManager] buildings];
+   /*
+    for (Building *loopBuilding in allBuildings)
+    {
+        if ([NSNotFound isEqual[loopBuilding.name rangeOfString:building]]) {
+            <#statements#>
+        }
+        
+    }*/
 }
 -(void)updateUI
 {
